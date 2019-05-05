@@ -35,10 +35,10 @@ return  <div>
               <ExpandMore/>
           </IconButton>
             <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
-              <DialogEditCar closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)} menuVisible={true} />
+              <DialogEditCar closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
               <DialogEditPhotoCar closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)} />
               <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)} />
-              <DialogServices closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)} />
+              <DialogServices closeMenu={() => handleAnchor(null)} item={car} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
               <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={car} confirm={car => deleteCar(car,console.log)} />
           </Menu>
         </div>;
