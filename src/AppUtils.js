@@ -6,7 +6,7 @@ export const MESSAGE_UPDATE = `You've successfully updated your data`;
 export const MESSAGE_DELETE = `You've successfully removed your data`; 
 export const PARAMS_CAR_ID = new URLSearchParams(window.location.search).get('carId');
 export const PARAMS_OIL_CHANGE = new URLSearchParams(window.location.search).get('oilChange');
-export const PARAMS_HAS_SERVICES = new URLSearchParams(window.location.search).get('hasServices');
+export const PARAMS_HAS_SERVICES = new URLSearchParams(window.location.search).get('hasService');
 
 // eslint-disable-next-line
 export const CLEAN_OBJECT = obj => Object.keys(obj).reduce((p, c) => (obj[c]? p[c] = obj[c] : null, p), {});
