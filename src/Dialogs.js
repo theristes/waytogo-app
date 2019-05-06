@@ -36,7 +36,7 @@ const DialogAddCar = ({confirm}) => {
                   <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
                   <DialogContent>
                       <TextField label="Make" onChange={handleChange('make')}
-                      margin="normal" variant="filled" fullWidth />
+                      margin="normal" variant="filled" autoFocus fullWidth />
                       <TextField label="Model" onChange={handleChange('model')}
                       margin="normal" variant="filled" fullWidth/>
                       <TextField label="Color" onChange={handleChange('color')}
@@ -70,16 +70,14 @@ const DialogAddCar = ({confirm}) => {
             </div>
 }
 
-const DialogEditCar = ({closeMenu, item, confirm, menuVisible}) => {
+const DialogEditCar = ({closeMenu, item, confirm, menuVisible, forceFocusOnDate}) => {
     const [open, setOpen] = useState(!menuVisible);
     const [car, setCar] = useState(item)
     const handleChange = value => event => setCar({ ...car, [value]: event.target.value });    
     const handleToggleOpen = (value,closeBehind) => () => ((!value) && (closeBehind)) ? (closeBehind(), setOpen(value)) : setOpen(value);
     // eslint-disable-next-line
     const handleConfirm = (fn,car,closeBehind) => () => (fn(car), handleToggleOpen(false,closeBehind)());
-    const textField = useRef({});
-
-    return  <div>
+return  <div>
             { (menuVisible) ? 
                 <MenuItem onClick={handleToggleOpen(true)}>
                     <ListItemIcon><Edit/></ListItemIcon>
@@ -90,7 +88,7 @@ const DialogEditCar = ({closeMenu, item, confirm, menuVisible}) => {
                 <DialogTitle id="form-dialog-title"> {`${car.make} ${car.model}`} </DialogTitle>
                 <DialogContent>
                     <TextField  label="Make" value={car.make} onChange={handleChange('make')}
-                                margin="normal" variant="filled" fullWidth />
+                                margin="normal" variant="filled" fullWidth  autoFocus/>
                     <TextField  label="Model" value={car.model} onChange={handleChange('model')}
                                 margin="normal" variant="filled" fullWidth/>
                     <TextField  label="Color" value={car.color} onChange={handleChange('color')}
@@ -105,13 +103,13 @@ const DialogEditCar = ({closeMenu, item, confirm, menuVisible}) => {
                     <TextField  label="The last oil changed" type="Date" 
                                 onChange={handleChange('dtLastOilChange')}
                                 value={car.dtLastOilChange}
+                                autoFocus={forceFocusOnDate}
                                 margin="normal" variant="filled" fullWidth 
                                 InputProps={{
                                     startAdornment: (
-                                        <InputAdornment position="start">
-                                        <CalendarToday />
-                                    </InputAdornment>
-                                    ),}}/> 
+                                        <InputAdornment position="start"> <CalendarToday /> </InputAdornment>
+                                    ),}}
+                    /> 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleConfirm(confirm,car,closeMenu)} color="primary">
@@ -346,8 +344,10 @@ const DialogNotifications = () => {
     const [countNotifies, setCountNotifies] = useState(0);
     const handleToggleOpen = value => () => setOpen(value);
     useEffect(() => {
-        // eslint-disable-next-line
-        value && setCountNotifies(value.docs.length);
+            value && setCountNotifies(value.docs.length);
+        return () => {
+            setCountNotifies(0);
+        }
     })
   return  <div>
               <IconButton color="inherit" aria-label="Notifications" onClick={handleToggleOpen(true)}>

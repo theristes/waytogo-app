@@ -76,12 +76,12 @@ return  <ListItem alignItems="flex-start">
                 
               {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
                   <DialogEditCar closeMenu={() => {}} item={item}  confirm={car => updateCar(car,console.log)}
-                                menuVisible={false} />
+                                menuVisible={false} forceFocusOnDate={true} />
                 : <></> }
 
               {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
                   <DialogServices closeMenu={() => {}} item={item}  confirm={car => updateCar(car,console.log)}
-                                  menuVisible={false}  />
+                                  menuVisible={false} />
                 : <></> }
             <CarOptions item={item}></CarOptions>
       </ListItem>
