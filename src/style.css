@@ -11,6 +11,58 @@
   height: 100%;
   width: 100%;
 }
+
+.img-loading {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-label {
+  color: rgb(62, 87, 209);
+  margin: 0;
+  font-size: 1rem;
+  text-align: left;
+  /* margin-top: 8px; */
+  min-height: 1em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1em;
+  /* align-items: center; */
+  display: block;
+  align-content: center;
+  text-align: center;
+}
+
+
+.img-error {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4em;
+  margin-bottom: 4em;
+  height: 50%;
+  width: 50%;
+}
+
+.error-label {
+  color: #f52409;
+  margin: 0;
+  font-size: 1.5rem;
+  text-align: left;
+  /* margin-top: 8px; */
+  min-height: 1em;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1em;
+  /* align-items: center; */
+  display: block;
+  align-content: center;
+  text-align: center;
+}
+
+
+
+
+
 img:hover img.img-car {
   border: solid 1px #CCC;
   -moz-box-shadow: 1px 1px 5px #999;

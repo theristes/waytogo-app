@@ -14,7 +14,7 @@ import  { Add, Edit, Delete, Build, Person,
 import  { imagesRef }
   from  './FirebaseService';
 
-import  { LOADING_PHOTO, RANDOM_KEY }
+import  { LOADING_PHOTO, ERROR_PHOTO, RANDOM_KEY }
   from  './AppUtils';
 
 const DialogAddCar = ({confirm}) => {
@@ -152,13 +152,15 @@ const DialogEditPhotoCar = ({closeMenu, item, confirm}) => {
     const handleChange = (e) => {
         const file = e.target.files[0];
         const uploadTask = imagesRef(item.id).put(file);
-        uploadTask.on('state_changed', () => setPhoto(LOADING_PHOTO) , (error) => {
-            console.log(`An error just happened: ${error}`)
-        }, async() => {
-          const downloadFile = await uploadTask.snapshot.ref.getDownloadURL();
-          let toUpdate = { ...car, photo: downloadFile };
-          setPhoto(downloadFile);
-          confirm(toUpdate);
+        uploadTask.on('state_changed',
+        () => setPhoto(LOADING_PHOTO), // LOADING 
+        // eslint-disable-next-line
+        (error) => (setPhoto(ERROR_PHOTO), console.log(`An error: ${error}`)), // ERROR
+        async() => {
+            const downloadFile = await uploadTask.snapshot.ref.getDownloadURL();
+            let toUpdate = { ...car, photo: downloadFile };
+            setPhoto(downloadFile);
+            confirm(toUpdate);
         });
     }
     return  <div>
@@ -264,8 +266,9 @@ const DialogServices = ({closeMenu, item, confirm, menuVisible}) => {
 }
 
 const DialogEditCustomerCar = ({closeMenu, item, confirm}) => {
+    const emptyCustomer = { address: '', document: '', name: '', beginDate: '', endDate: '', value : 0};
     const [open, setOpen] = useState(false);
-    const [customer, setCustomer] = useState(item.customer || { address: '', document: '', name: '', beginDate: '', endDate: '', value : 0} )
+    const [customer, setCustomer] = useState( () => item.customer ||  emptyCustomer )
     const handleChange = value => event => setCustomer({ ...customer, [value]: event.target.value });    
     const handleToggleOpen = (value,closeBehind) => () => ((!value) && (closeBehind)) ? (closeBehind(), setOpen(value)) : setOpen(value);
     // eslint-disable-next-line
