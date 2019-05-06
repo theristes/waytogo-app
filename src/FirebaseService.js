@@ -25,17 +25,6 @@ const imagesRef = id => storage.ref().child(id);
 const getCarsColletion = db.collection('cars');
 const getNotificationColletion = db.collection('notifications');
 
-const getNotificationsCount = async(fn) => {
-    try {
-        const data = await getNotificationColletion.get();
-        const notifications = await data.docChanges().map(v => ({id:v.doc.id, ...v.doc.data()}));
-        fn(notifications.length);
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-
 const getCars = async(fn) => {
     try {
         const data = await getCarsColletion.get();
@@ -97,4 +86,4 @@ const pushNotifications = async() => {
 }
 pushNotifications();
 
-export { getCars, addCar, updateCar, deleteCar, storage, imagesRef, getCarsColletion, getNotificationsCount }
+export { getCars, addCar, updateCar, deleteCar, storage, imagesRef, getCarsColletion, getNotificationColletion }

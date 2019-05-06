@@ -1,18 +1,22 @@
-import  React , { useState, useRef } 
+import  React , { useState, useRef, useEffect } 
   from  'react';
 
 import  { Dialog, DialogContent, TextField, DialogTitle,
-          DialogActions, Button, MenuItem,Checkbox, 
+          DialogActions, Button, MenuItem, Checkbox, Badge,
           ListItemText, ListItemIcon, InputAdornment, List,
-          ListItem, ListItemSecondaryAction, IconButton }
+          ListItem, ListItemSecondaryAction, IconButton,
+          ListItemAvatar, Avatar }
   from  '@material-ui/core';
 
-import  { Add, Edit, Delete, Build, Person,
-          Photo,  CalendarToday, AttachMoney }
+import  { Add, Edit, Delete, Build, Person, 
+          Photo,  CalendarToday, AttachMoney, Notifications }
   from  '@material-ui/icons';
 
-import  { imagesRef }
+import  { imagesRef, getNotificationColletion }
   from  './FirebaseService';
+
+import  { useCollection } 
+  from  'react-firebase-hooks/firestore';
 
 import  { LOADING_PHOTO, ERROR_PHOTO, RANDOM_KEY }
   from  './AppUtils';
@@ -73,6 +77,8 @@ const DialogEditCar = ({closeMenu, item, confirm, menuVisible}) => {
     const handleToggleOpen = (value,closeBehind) => () => ((!value) && (closeBehind)) ? (closeBehind(), setOpen(value)) : setOpen(value);
     // eslint-disable-next-line
     const handleConfirm = (fn,car,closeBehind) => () => (fn(car), handleToggleOpen(false,closeBehind)());
+    const textField = useRef({});
+
     return  <div>
             { (menuVisible) ? 
                 <MenuItem onClick={handleToggleOpen(true)}>
@@ -83,29 +89,29 @@ const DialogEditCar = ({closeMenu, item, confirm, menuVisible}) => {
             <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title"> {`${car.make} ${car.model}`} </DialogTitle>
                 <DialogContent>
-                      <TextField label="Make" value={car.make} onChange={handleChange('make')}
-                      margin="normal" variant="filled" fullWidth />
-                      <TextField label="Model" value={car.model} onChange={handleChange('model')}
-                      margin="normal" variant="filled" fullWidth/>
-                      <TextField label="Color" value={car.color} onChange={handleChange('color')}
-                      margin="normal" variant="filled" fullWidth/>
-                      <TextField label="Vim" value={car.vim} onChange={handleChange('vim')}
-                      margin="normal" variant="filled" fullWidth/>
-                      <TextField label="Plate" value={car.licensePlate} onChange={handleChange('licensePlate')}
-                      margin="normal" variant="filled" fullWidth/>
-                      <TextField label="Year" value={car.year} onChange={handleChange('year')}
-                      margin="normal" variant="filled" fullWidth/> <br/>
-                      <TextField  label="The last oil changed" type="Date" 
-                      onChange={handleChange('dtLastOilChange')}
-                      value={car.dtLastOilChange}
-                      margin="normal" variant="filled" fullWidth 
-                      InputProps={{
-                        startAdornment: (
-                            <InputAdornment position="start">
-                            <CalendarToday />
-                        </InputAdornment>
-                        ),
-                      }}/> 
+                    <TextField  label="Make" value={car.make} onChange={handleChange('make')}
+                                margin="normal" variant="filled" fullWidth />
+                    <TextField  label="Model" value={car.model} onChange={handleChange('model')}
+                                margin="normal" variant="filled" fullWidth/>
+                    <TextField  label="Color" value={car.color} onChange={handleChange('color')}
+                                margin="normal" variant="filled" fullWidth/>
+                    <TextField  label="Vim" value={car.vim} onChange={handleChange('vim')}
+                                margin="normal" variant="filled" fullWidth/>
+                    <TextField  label="Plate" value={car.licensePlate} onChange={handleChange('licensePlate')}
+                                margin="normal" variant="filled" fullWidth/>
+                    <TextField  label="Year" value={car.year} onChange={handleChange('year')}
+                                margin="normal" variant="filled" fullWidth/> <br/>
+
+                    <TextField  label="The last oil changed" type="Date" 
+                                onChange={handleChange('dtLastOilChange')}
+                                value={car.dtLastOilChange}
+                                margin="normal" variant="filled" fullWidth 
+                                InputProps={{
+                                    startAdornment: (
+                                        <InputAdornment position="start">
+                                        <CalendarToday />
+                                    </InputAdornment>
+                                    ),}}/> 
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleConfirm(confirm,car,closeMenu)} color="primary">
@@ -324,5 +330,48 @@ const DialogEditCustomerCar = ({closeMenu, item, confirm}) => {
         </div>
 }
 
+const NotificationDetail = ({item}) => 
+    <ListItem alignItems="flex-start" button component="a" href={item.clickAction}>
+            <ListItemAvatar> 
+                <Avatar alt="Car Sharp" src={item.icon}/>
+            </ListItemAvatar>
+        <ListItemText primary={item.title} secondary={<React.Fragment>{item.body}</React.Fragment>}/>
+    </ListItem>
+
+
+
+const DialogNotifications = () => {
+    const [open, setOpen] = useState(false);
+    const  { error,loading,value } = useCollection(getNotificationColletion);
+    const [countNotifies, setCountNotifies] = useState(0);
+    const handleToggleOpen = value => () => setOpen(value);
+    useEffect(() => {
+        // eslint-disable-next-line
+        value && setCountNotifies(value.docs.length);
+    })
+  return  <div>
+              <IconButton color="inherit" aria-label="Notifications" onClick={handleToggleOpen(true)}>
+                <Badge badgeContent={countNotifies} color="secondary">
+                    <Notifications  />
+                </Badge>
+              </IconButton>
+              <Dialog open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title"> Notifications </DialogTitle>
+                    <DialogContent>
+                            { error && <b>Error</b> }
+                            { loading }
+                            { value &&  <List> {
+                                            ( value.docs.map( notification =>
+                                                <NotificationDetail 
+                                                    key={notification.id} 
+                                                    item={{id:notification.id, ...notification.data()}
+                                                }/>
+                                            ) )
+                                        }</List> }
+                    </DialogContent>
+              </Dialog>
+          </div>
+}
+
 export { DialogAddCar, DialogEditCar, DialogEditCustomerCar,
-         DialogServices, DialogDeleteCar, DialogEditPhotoCar }
+         DialogServices, DialogDeleteCar, DialogEditPhotoCar, DialogNotifications }
