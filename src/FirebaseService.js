@@ -19,10 +19,7 @@ const config = (env => ({
     }))(process.env)
 
 const firebaseApp = firebase.initializeApp(config);
-const {email,password} = (env => 
-    ({email:env.REACT_APP_AUTH_EMAIL,
-        password:env.REACT_APP_AUTH_PASSWORD}))
-    (process.env);
+const {email,password} = (env =>  ({email:env.REACT_APP_AUTH_EMAIL, password:env.REACT_APP_AUTH_PASSWORD})) (process.env);
 
 firebase.auth()
         .signInWithEmailAndPassword(email,password)
