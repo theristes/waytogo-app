@@ -1,23 +1,33 @@
 import  firebase 
   from  'firebase/app';
 
+import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/messaging';
 import 'firebase/storage';
 
 import  { MESSAGE_UPDATE, MESSAGE_DELETE, MESSAGE_INSERT, CLEAN_OBJECT, NO_PHOTO }
   from  './AppUtils';
- 
-const config = env => ({
-    apiKey: env.REACT_APP_API_KEY,
-    authDomain: env.REACT_APP_AUTH_DOMAIN,
-    databaseURL: env.REACT_APP_DATABASE_URL,
-    projectId: env.REACT_APP_PROJECT_ID,
-    storageBucket: env.REACT_APP_STORAGE_BUCKET,
-    messagingSenderId: env.REACT_APP_MESSAGING_SENDER_ID
-})
 
-const firebaseApp = firebase.initializeApp(config(process.env));
+const config = (env => ({
+        apiKey: env.REACT_APP_API_KEY,
+        authDomain: env.REACT_APP_AUTH_DOMAIN,
+        databaseURL: env.REACT_APP_DATABASE_URL,
+        projectId: env.REACT_APP_PROJECT_ID,
+        storageBucket: env.REACT_APP_STORAGE_BUCKET,
+        messagingSenderId: env.REACT_APP_MESSAGING_SENDER_ID
+    }))(process.env)
+
+const firebaseApp = firebase.initializeApp(config);
+const {email,password} = (env => 
+    ({email:env.REACT_APP_AUTH_EMAIL,
+        password:env.REACT_APP_AUTH_PASSWORD}))
+    (process.env);
+
+firebase.auth()
+        .signInWithEmailAndPassword(email,password)
+        .catch(error => console.log(error));
+
 const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
 const imagesRef = id => storage.ref().child(id);
