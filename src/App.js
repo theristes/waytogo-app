@@ -2,7 +2,7 @@ import  React, { useState }
   from  'react';
 
 import  pngLogo
-  from  './assets/logo.png';
+  from  './assets/logo-plate.png';
 
 import  gifLoading
   from  './assets/loading.gif';
@@ -10,7 +10,7 @@ import  gifLoading
 import  pngError
   from  './assets/error.png';
 
-import  { AppBar, Toolbar, Menu, IconButton, List, ListItem, 
+import  { AppBar, Toolbar, Menu, IconButton, List, ListItem, Divider,
           ListItemText, ListItemAvatar, Avatar, Typography }
   from  '@material-ui/core';
 
@@ -28,9 +28,10 @@ import  { updateCar, addCar, deleteCar, getCarsColletion }
   from  './FirebaseService';
 
 import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }
-  from  './AppUtils.js'
+  from  './AppUtils'
 
 import  './style.css';
+
 
 const   Loading = ({loadingImage}) => 
         <div>
@@ -87,27 +88,30 @@ return  <ListItem alignItems="flex-start">
       </ListItem>
 }
 
- const  Cars = () => {
+const  Cars = () => {
  const  { error, loading, value } = useCollection(getCarsColletion);
 return  <div>
-             { error && <Error errorMessage={''} errorImage={pngError}/> }
+             { error && <Error errorMessage={error} errorImage={pngError}/> }
            { loading && <Loading loadingImage={gifLoading}/>  }
              { value && <List> 
                           { value.docs.map( car=><Car key={car.id} item={{id:car.id, ...car.data()}}/>) }  
+                            <Divider variant="inset" />
                         </List> }
         </div>
 }
 
- const  Main = (img, car = {}) => () => {
+const  Main = (img, car = {}) => () => {
 return  <div>
-          <AppBar position="static">
+          <AppBar>
             <Toolbar>
               <DialogAddCar confirm={car => addCar(car,console.log)}/>
-              <img className='img-logo' src={img} alt='logo' />
+                <img src={img} className="img-logo" alt="logo"/>
               <DialogNotifications/>
             </Toolbar>
           </AppBar>
-          <Cars></Cars>
+          <div className="main-cointainer">
+            <Cars></Cars>
+          </div>
         </div>
 }
 

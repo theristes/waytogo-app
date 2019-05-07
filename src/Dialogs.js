@@ -8,7 +8,7 @@ import  { Dialog, DialogContent, TextField, DialogTitle,
           ListItemAvatar, Avatar }
   from  '@material-ui/core';
 
-import  { Add, Edit, Delete, Build, Person, 
+import  { Add, Edit, Delete, Build, Person, NoteAdd,
           Photo,  CalendarToday, AttachMoney, Notifications }
   from  '@material-ui/icons';
 
@@ -21,6 +21,8 @@ import  { useCollection }
 import  { LOADING_PHOTO, ERROR_PHOTO, RANDOM_KEY }
   from  './AppUtils';
 
+
+
 const DialogAddCar = ({confirm}) => {
     const [open, setOpen] = useState(false);
     const [car, setCar] = useState({})
@@ -30,7 +32,7 @@ const DialogAddCar = ({confirm}) => {
     const handleConfirm = (fn,car) => () => (fn(car),setOpen(false));
     return <div>
               <IconButton color="inherit" aria-label="Menu" onClick={handleToggleOpen(true)}>
-                <Add/>
+                <NoteAdd/>
               </IconButton>
               <Dialog open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
                   <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
