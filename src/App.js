@@ -10,8 +10,9 @@ import  gifLoading
 import  pngError
   from  './assets/error.png';
 
-import  { AppBar, Toolbar, Menu, IconButton, List, ListItem, Divider,
-          ListItemText, ListItemAvatar, Avatar, Typography }
+import  { AppBar, Toolbar, Menu, IconButton, List, ListItem, 
+          Card,
+          ListItemText, ListItemAvatar, Avatar, Typography, TextField, Button }
   from  '@material-ui/core';
 
 import  { ExpandMore }
@@ -54,7 +55,6 @@ return  <div>
           </IconButton>
           <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
               <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
-              <DialogEditPhotoCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
               <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
               <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
               <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => deleteCar(car,console.log)} />
@@ -63,29 +63,32 @@ return  <div>
 }
 
 const   Car = ({item}) => {
-return  <ListItem alignItems="flex-start">
-            <ListItemAvatar> 
-                <Avatar alt="Car Sharp" src={item.photo}/>
-            </ListItemAvatar>
-            <ListItemText primary={item.make} secondary={
-                <React.Fragment>
-                    <Typography component="span" className="inline" color="textPrimary">{item.model} </Typography>
-                    <strong>Plate: </strong>{item.licensePlate} <br/>
-                    <strong>Customer: </strong> {item.customer ? item.customer.name : 'No customer'} <br/>
-                    <strong>Year: </strong> {item.year} <br/>
-                </React.Fragment>}/>
-                
-              {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
-                  <DialogEditCar closeMenu={() => {}} item={item}  confirm={car => updateCar(car,console.log)}
-                                menuVisible={false} forceFocusOnDate={true} />
-                : <></> }
+const [open, setOpen] = useState(false);
 
-              {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
-                  <DialogServices closeMenu={() => {}} item={item}  confirm={car => updateCar(car,console.log)}
-                                  menuVisible={false} />
-                : <></> }
-            <CarOptions item={item}></CarOptions>
-      </ListItem>
+return  <Card className="car"> 
+          <ListItem alignItems="flex-start">
+              <ListItemAvatar> 
+                  <Avatar alt="Car Sharp" src={item.photo} onClick={() => (setOpen(true))}/>                  
+              </ListItemAvatar>
+              <ListItemText primary={`${item.make} ${item.model}`} secondary={
+                  <React.Fragment>
+                      <Typography component="span" className="inline" color="textPrimary"> </Typography>
+                      <strong>Plate: </strong>{item.licensePlate} <br/>
+                      <strong>Customer: </strong> {item.customer ? item.customer.name : 'No customer'} <br/>
+                      <strong>Year: </strong> {item.year} <br/>
+                  </React.Fragment>}/>
+                <DialogEditPhotoCar open={open} setOpen={setOpen}  item={item} confirm={car => updateCar(car,console.log)}/>
+                 
+                {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
+                    <DialogEditCar item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} forceFocusOnDate={true} />
+                  : <></> }
+
+                {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
+                    <DialogServices item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} />
+                  : <></> }
+              <CarOptions item={item}></CarOptions>
+        </ListItem> 
+      </Card>
 }
 
 const  Cars = () => {
@@ -94,13 +97,42 @@ return  <div>
              { error && <Error errorMessage={error} errorImage={pngError}/> }
            { loading && <Loading loadingImage={gifLoading}/>  }
              { value && <List> 
-                          { value.docs.map( car=><Car key={car.id} item={{id:car.id, ...car.data()}}/>) }  
-                            <Divider variant="inset" />
+                          { value.docs.map( car=><Car key={car.id} item={{id:car.id, ...car.data()}}/>) } 
                         </List> }
         </div>
 }
 
-const  Main = (img, car = {}) => () => {
+const  Login = (img) => {
+  const [loginData,setLoginData] = useState(() => ({email:'', password:''}));
+  const handleChange = value => event => setLoginData({ ...loginData, [value]: event.target.value });    
+  return  <div>
+            <AppBar>
+              <Toolbar>
+                <DialogAddCar confirm={car => addCar(car,console.log)}/>
+                  <img src={img} className="img-logo" alt="logo"/>
+              </Toolbar>
+            </AppBar>
+              <div className="login">
+                <Card>
+                  <TextField  label="Email"  onChange={handleChange('email')}
+                                    margin="normal" variant="filled" fullWidth />
+                  <TextField  label="Password" type="password" onChange={handleChange('password')}
+                              margin="normal" variant="filled" fullWidth/>
+                              
+                  <Button  color="primary">
+                      Login
+                  </Button>
+                  <Button color="secondary">
+                      Cancel
+                  </Button>
+
+                </Card>
+            </div>
+          </div>
+  }
+
+
+const  Main = (img) => () => {
 return  <div>
           <AppBar>
             <Toolbar>
@@ -115,6 +147,6 @@ return  <div>
         </div>
 }
 
-const   App = Main(pngLogo,{});
+const   App = () => Login(pngLogo);
 
 export  default App;

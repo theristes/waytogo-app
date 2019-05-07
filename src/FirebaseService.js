@@ -22,7 +22,7 @@ const firebaseApp = firebase.initializeApp(config);
 const {email,password} = (env =>  ({email:env.REACT_APP_AUTH_EMAIL, password:env.REACT_APP_AUTH_PASSWORD})) (process.env);
 
 firebase.auth()
-        .signInWithEmailAndPassword(email,password)
+        .signInWithEmailAndPassword(email,password).then( v => console.log(v))
         .catch(error => console.log(error));
 
 const db =  firebaseApp.firestore();

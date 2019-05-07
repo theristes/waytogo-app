@@ -1,9 +1,27 @@
+body {
+  background: #cbd3e9;
+}
+
 .main-cointainer {
   display: block;
   height: 100%;
-  margin-top: 3rem;
+  margin-top: 4rem;
   margin-bottom: auto;
 }
+
+.login {
+  height: 100%;
+  margin-top: 4rem;
+  margin-bottom: auto;
+  padding-right: 1rem;
+  padding-left : 1rem;
+}
+
+
+.car {
+  margin-bottom: 0.5rem;
+}
+
 
 .img-logo {
   width: 40%;

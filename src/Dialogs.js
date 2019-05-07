@@ -9,7 +9,7 @@ import  { Dialog, DialogContent, TextField, DialogTitle,
   from  '@material-ui/core';
 
 import  { Add, Edit, Delete, Build, Person, NoteAdd,
-          Photo,  CalendarToday, AttachMoney, Notifications }
+          CalendarToday, AttachMoney, Notifications }
   from  '@material-ui/icons';
 
 import  { imagesRef, getNotificationColletion }
@@ -38,7 +38,7 @@ const DialogAddCar = ({confirm}) => {
                   <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
                   <DialogContent>
                       <TextField label="Make" onChange={handleChange('make')}
-                      margin="normal" variant="filled" autoFocus fullWidth />
+                      margin="normal" variant="filled" fullWidth />
                       <TextField label="Model" onChange={handleChange('model')}
                       margin="normal" variant="filled" fullWidth/>
                       <TextField label="Color" onChange={handleChange('color')}
@@ -150,8 +150,7 @@ const DialogDeleteCar = ({closeMenu, item, confirm}) => {
         </div>
 }
 
-const DialogEditPhotoCar = ({closeMenu, item, confirm}) => {
-    const [open, setOpen] = useState(false);
+const DialogEditPhotoCar = ({closeMenu, item, open, setOpen, confirm}) => {
     const [car] = useState(item);
     const [photo, setPhoto] = useState(item.photo);
     const handleToggleOpen = (value,closeBehind) => () => ((!value) && (closeBehind)) ? (closeBehind(), setOpen(value)) : setOpen(value);
@@ -170,10 +169,6 @@ const DialogEditPhotoCar = ({closeMenu, item, confirm}) => {
         });
     }
     return  <div>
-            <MenuItem onClick={handleToggleOpen(true)}>
-                <ListItemIcon><Photo/></ListItemIcon>
-                <ListItemText inset primary="Photo"/>
-            </MenuItem>
             <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Photo</DialogTitle>
                 <DialogContent>
