@@ -25,7 +25,7 @@ function Login() {
         return;
     }    
     const send = await forgotPassword(loginData.email);
-    send ? setErrorMessage(send) : setSuccessMessage(`The reset password's link was sent to the email`);
+    (send && send.id== -1) ? setErrorMessage(send.message) : setSuccessMessage(send.message);
   };
 
   return  (<div className="main-cointainer">

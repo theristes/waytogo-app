@@ -9,10 +9,16 @@ const DialogAddUser = ({open, setOpen, confirm}) => {
     const handleToggleOpen = value => () => setOpen(value);
     // eslint-disable-next-line
     const handleConfirm = (fn,user) => () => {
+        if (user.email === '') {
+            setErrorMessage(`The email field can't be blank`);
+            return;
+        }    
+
         if (user.password !== user.confirmPassword) {
             setErrorMessage(`The password's fields must have the same value each`)
             return
         }
+        
         fn({email:user.email,password:user.password});
         setOpen(false)
     };

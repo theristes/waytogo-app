@@ -25,6 +25,7 @@ const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
 const imagesRef = id => storage.ref().child(id);
 
+const getUsers = db.collection('users');
 const getCarsColletion = db.collection('cars');
 const getNotificationColletion = db.collection('notifications');
 const getTokensColletion = db.collection('tokens');
@@ -53,8 +54,11 @@ async function createUser ({email, password}) {
     let user;
     try {
         const auth =  await firebaseApp.auth();
-        const created = await auth.createUserWithEmailAndPassword(email,password)
-        user = {id: created.user.uid, token: created.user.refreshToken, message: 'user signed'}
+        const created = await auth.createUserWithEmailAndPassword(email,password);
+        if (created && created.user && created.user.uid) {
+            getUsers.doc(created.user.id).set(created.user);
+            user = {id: created.user.uid, token: created.user.refreshToken, message: 'user signed'}
+        }
     } catch (error) {
         user = ({id: -1, message: error.message})
     } finally {
@@ -63,12 +67,15 @@ async function createUser ({email, password}) {
 }
 
 async function forgotPassword (email) {
+    let result;
     try {
-        await firebaseApp.auth().sendPasswordResetEmail(email);
+      let load = await firebaseApp.auth().sendPasswordResetEmail(email);
+      console.log(load)
+      result = ({id:1, message: `The reset password's link was sent to the email`}); 
     } catch (error) {
-        return error.message;
-    } finally { 
-        return null;
+      result = ({id: -1, message: error.message})
+    } finally {
+        return result;
     }
 }
 
