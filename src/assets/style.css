@@ -1,4 +1,4 @@
-body {
+  body {
     background: #cbd3e9;
   }
   
@@ -7,14 +7,22 @@ body {
     height: 100%;
     margin-top: 5rem;
     margin-bottom: auto;
-  }
-  
+  }  
   
   .car {
     margin-bottom: 0.5rem;
   }
   
+  .button-add {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin-bottom: 20px;
+    margin-right: 12px;
+  }
   
+  
+
   .img-logo {
     width: 40%;
     height: 40%;
@@ -74,8 +82,8 @@ body {
     align-content: center;
     text-align: center;
   }
-  
-  
+
+
   
   img:hover img.img-car {
     border: solid 1px #CCC;

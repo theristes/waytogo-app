@@ -12,17 +12,11 @@ function Login() {
   const [loginData,setLoginData] = useState(() => ({email:'', password:''}));
   const handleChange = value => event => setLoginData({ ...loginData, [value]: event.target.value });    
   const handleEnterButton = async(e) => { 
-        const user = await authUser(loginData);
-        debugger;
-        if (user && user.id === -1) {
-            setErrorMessage(user.message);
-            console.log(user);
-        } else if (user) {
-          console.log(user);
-        } else {
-            localStorage.setItem('uid',user.id);
-            window.location.href = '/';
-        }
+    const user = await authUser(loginData);
+    if (user && user.id === -1) {
+        setErrorMessage(user.message);
+        console.log(user);
+    } 
   };
   
   const handleForgotPasswordButton = async(e) => {

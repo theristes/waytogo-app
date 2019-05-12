@@ -24,6 +24,7 @@ const auth =  firebaseApp.auth();
 const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
 const imagesRef = id => storage.ref().child(id);
+
 const getCarsColletion = db.collection('cars');
 const getNotificationColletion = db.collection('notifications');
 const getTokensColletion = db.collection('tokens');

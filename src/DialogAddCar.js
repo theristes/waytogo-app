@@ -1,7 +1,9 @@
 import  React , { useState } 
   from  'react';
-import { MenuItem, ListItemIcon, ListItemText, Dialog, DialogTitle, DialogContent, TextField, InputAdornment, Button, DialogActions } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, TextField, InputAdornment, Button, DialogActions, Tooltip, Fab  } from '@material-ui/core';
 import { NoteAdd, CalendarToday } from '@material-ui/icons';
+import { Add } from '@material-ui/icons';
+
 
 
 function DialogAddCar({confirm}) {
@@ -12,10 +14,13 @@ function DialogAddCar({confirm}) {
     // eslint-disable-next-line
     const handleConfirm = (fn,car) => () => (fn(car),setOpen(false));
     return  <div>
-                <MenuItem onClick={handleToggleOpen(true)}>
-                    <ListItemIcon><NoteAdd/></ListItemIcon>
-                    <ListItemText inset primary="New Car"/>
-                </MenuItem> 
+                <div className="button-add">
+                  <Tooltip title="Add" aria-label="Add a new car">
+                      <Fab color="primary" onClick={handleToggleOpen(true)}>
+                          <Add/>
+                      </Fab>
+                  </Tooltip>
+                </div>
                 <Dialog open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
                     <DialogContent>

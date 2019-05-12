@@ -1,37 +1,18 @@
-import  React, { useState } 
-  from  'react';
-
-
-import  gifLoading
-  from  './assets/loading.gif';
-
-import  pngError
-  from  './assets/error.png';
-
-import  { Menu, IconButton, List, ListItem, Card,
-          ListItemText, ListItemAvatar, Avatar, Typography }
-  from  '@material-ui/core';
-
-import  { ExpandMore }
-  from  '@material-ui/icons';
-
-
-import  { useCollection } 
-  from  'react-firebase-hooks/firestore';
-
-import  { updateCar, deleteCar, getCarsColletion }
-  from  './Service';
-
-import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }
-  from  './AppUtils'
-
-import { DialogEditCar } from './DialogEditCar';
-import { DialogEditCustomerCar } from './DialogEditCustomerCar';
-import { DialogServices } from './DialogServices';
-import { DialogDeleteCar } from './DialogDeleteCar';
-import { DialogEditPhotoCar } from './DialogEditPhotoCar';
-import { Error } from './Error';
-import { Loading } from './Loading';
+import  React, { useState }  from  'react';
+import  gifLoading from  './assets/loading.gif';
+import  pngError  from  './assets/error.png';
+import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography }  from  '@material-ui/core';
+import  { ExpandMore }  from  '@material-ui/icons';
+import  { useCollection }   from  'react-firebase-hooks/firestore';
+import  { updateCar, deleteCar, getCarsColletion }  from  './Service';
+import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }  from  './AppUtils';
+import  { DialogEditCar } from './DialogEditCar';
+import  { DialogEditCustomerCar } from './DialogEditCustomerCar';
+import  { DialogServices } from './DialogServices';
+import  { DialogDeleteCar } from './DialogDeleteCar';
+import  { DialogEditPhotoCar } from './DialogEditPhotoCar';
+import  { Error } from './Error';
+import  { Loading } from './Loading';
 
 
 function CarOptions({item}) {
@@ -80,14 +61,17 @@ function Car({item}) {
     
 function Cars(){
     const  { error, loading, value } = useCollection(getCarsColletion);
-    return  <div>
+    return  <div className="cars">
                     { error && <Error errorMessage={error} errorImage={pngError}/> }
                 { loading && <Loading loadingImage={gifLoading}/>  }
                     { value && <List> 
-                                { value.docs.map( car=><Car key={car.id} item={{id:car.id, ...car.data()}}/>) } 
-                            </List> }
+                                    { value.docs.map( car=>
+                                            <Car key={car.id} 
+                                                 item={{id:car.id, ...car.data()}
+                                    }/>)}
+                                </List>}
             </div>
 }
 
 
-export {Cars}
+export { Cars }

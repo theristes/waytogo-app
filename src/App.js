@@ -4,11 +4,13 @@ import  pngLogo from './assets/logo-plate.png';
 import  Login from './Login';
 import  { useAuthState } from 'react-firebase-hooks/auth';
 import  { auth } from './Service';
-import { MenuOptions } from './Menu';
 
 import  './assets/style.css';
-import { DialogNotifications } from './DialogNotifications';
-import { Cars } from './CarList';
+import  { DialogNotifications } from './DialogNotifications';
+import  { Cars } from './CarList';
+import  { DialogAddCar } from './DialogAddCar';
+import  { addCar } from './Service';
+import  { DialogExitApp } from './DialogExitApp';
 
 function  App() {
   const { loading, user } = useAuthState(auth);
@@ -23,13 +25,14 @@ function  App() {
     return  <div>
               <AppBar>
                 <Toolbar>
-                  <MenuOptions/>
-                  <img src={pngLogo} className="img-logo" alt="logo" />
+                  <DialogExitApp confirm={() => auth.signOut()}/>
+                  <img src={pngLogo} className="img-logo" alt="logo"/>
                   <DialogNotifications/>
                 </Toolbar>
               </AppBar>
               <div className="main-cointainer">
                 <Cars></Cars>
+                <DialogAddCar confirm={car => addCar(car,console.log)}/>
               </div>
             </div>
   }
