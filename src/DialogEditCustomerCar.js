@@ -24,7 +24,7 @@ function DialogEditCustomerCar({closeMenu, item, confirm}){
                 <ListItemIcon><Person/></ListItemIcon>
                 <ListItemText inset primary="Customer"/>
             </MenuItem>
-            <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+            <Dialog disableBackdropClick disableEscapeKeyDown open={open} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title"> Customer </DialogTitle>
                 <DialogContent>
                     <TextField  label="Address" value={customer.address} onChange={handleChange('address')}

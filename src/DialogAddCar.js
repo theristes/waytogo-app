@@ -1,10 +1,6 @@
-import  React , { useState } 
-  from  'react';
-import { Dialog, DialogTitle, DialogContent, TextField, InputAdornment, Button, DialogActions, Tooltip, Fab  } from '@material-ui/core';
-import { NoteAdd, CalendarToday } from '@material-ui/icons';
-import { Add } from '@material-ui/icons';
-
-
+import  React , { useState } from  'react';
+import  { Dialog, DialogTitle, DialogContent, TextField, InputAdornment, Button, DialogActions, Tooltip, Fab  } from '@material-ui/core';
+import  { Add, CalendarToday } from '@material-ui/icons';
 
 function DialogAddCar({confirm}) {
     const [open, setOpen] = useState(false);
@@ -15,13 +11,13 @@ function DialogAddCar({confirm}) {
     const handleConfirm = (fn,car) => () => (fn(car),setOpen(false));
     return  <div>
                 <div className="button-add">
-                  <Tooltip title="Add" aria-label="Add a new car">
+                  <Tooltip title="Add a new car" aria-label="Add a new car">
                       <Fab color="primary" onClick={handleToggleOpen(true)}>
                           <Add/>
                       </Fab>
                   </Tooltip>
                 </div>
-                <Dialog open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
+                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
                     <DialogContent>
                         <TextField  label="Make" onChange={handleChange('make')} margin="normal" variant="filled" fullWidth />

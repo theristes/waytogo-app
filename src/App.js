@@ -13,16 +13,10 @@ import  { addCar } from './Service';
 import  { DialogExitApp } from './DialogExitApp';
 
 function  App() {
-  const { loading, user } = useAuthState(auth);
-  
-  if (loading) {
-    return <div>
-              <p>Initialising User...</p>
-          </div>
-  }
-
+  const { _, user } = useAuthState(auth);
+ 
   if (user) {
-    return  <div>
+    return  (<div>
               <AppBar>
                 <Toolbar>
                   <DialogExitApp confirm={() => auth.signOut()}/>
@@ -34,17 +28,17 @@ function  App() {
                 <Cars></Cars>
                 <DialogAddCar confirm={car => addCar(car,console.log)}/>
               </div>
-            </div>
+            </div>)
   }
 
-  return  <div>
+  return  (<div>
             <AppBar>
               <Toolbar>
                 <img src={pngLogo} className="img-logo" alt="logo" />
               </Toolbar>
             </AppBar>
             <Login/>
-          </div>
+          </div>)
 }
 
 export default App;

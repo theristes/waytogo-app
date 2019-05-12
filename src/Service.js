@@ -25,10 +25,10 @@ const db =  firebaseApp.firestore();
 const storage = firebaseApp.storage();
 const imagesRef = id => storage.ref().child(id);
 
-const getUsers = db.collection('users');
 const getCarsColletion = db.collection('cars');
 const getNotificationColletion = db.collection('notifications');
 const getTokensColletion = db.collection('tokens');
+const getUsersColletion = db.collection('users');
 
 async function authUser ({email, password}) {
     let user;
@@ -56,7 +56,7 @@ async function createUser ({email, password}) {
         const auth =  await firebaseApp.auth();
         const created = await auth.createUserWithEmailAndPassword(email,password);
         if (created && created.user && created.user.uid) {
-            getUsers.doc(created.user.id).set(created.user);
+            await getUsersColletion.doc(created.user.uid).set({uid:created.user.uid, emai:created.user.email, admin:true})
             user = {id: created.user.uid, token: created.user.refreshToken, message: 'user signed'}
         }
     } catch (error) {
@@ -84,7 +84,7 @@ async function addCar(car, fn) {
         const toAdd = await getCarsColletion;
         toAdd.add({photo:NO_PHOTO, ...car});
         fn(MESSAGE_INSERT);
-    } catch (error) {
+    } catch(error) {
         fn(error)
     }
 }

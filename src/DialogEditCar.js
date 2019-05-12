@@ -1,4 +1,4 @@
-import  React , { useState, useRef } 
+import  React , { useState } 
   from  'react';
 
 import  { Dialog, DialogContent, TextField, DialogTitle,
@@ -24,7 +24,7 @@ function DialogEditCar({closeMenu, item, confirm, menuVisible, forceFocusOnDate}
                     <ListItemText inset primary="Edit Details"/>
                 </MenuItem> 
                 : <></> }
-                <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title"> {`${car.make} ${car.model}`} </DialogTitle>
                     <DialogContent>
                         <TextField  label="Make" value={car.make} onChange={handleChange('make')} margin="normal" variant="filled" fullWidth/>

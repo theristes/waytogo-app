@@ -57,7 +57,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
                     </MenuItem>
                 : <></> }
 
-                <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title">{`Services \n ${item.make} ${item.model} ${item.licensePlate}`} </DialogTitle>
                     <DialogContent>
                         <TextField  label="Add a service" value={valueText}  onChange={handleChange}

@@ -1,8 +1,8 @@
 import  React, { useState }  from  'react';
 import  gifLoading from  './assets/loading.gif';
 import  pngError  from  './assets/error.png';
-import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography }  from  '@material-ui/core';
-import  { ExpandMore }  from  '@material-ui/icons';
+import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography, MenuItem, ListItemIcon }  from  '@material-ui/core';
+import  { ExpandMore, Note }  from  '@material-ui/icons';
 import  { useCollection }   from  'react-firebase-hooks/firestore';
 import  { updateCar, deleteCar, getCarsColletion }  from  './Service';
 import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }  from  './AppUtils';
@@ -13,6 +13,8 @@ import  { DialogDeleteCar } from './DialogDeleteCar';
 import  { DialogEditPhotoCar } from './DialogEditPhotoCar';
 import  { Error } from './Error';
 import  { Loading } from './Loading';
+import  { GenerateLeaseAgreement } from './LeaseAgreement';
+
 
 
 function CarOptions({item}) {
@@ -24,6 +26,15 @@ function CarOptions({item}) {
               </IconButton>
               <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
                   <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
+                  {item.customer ? 
+                    <div>
+                    <MenuItem onClick={ () => GenerateLeaseAgreement(item) }>
+                        <ListItemIcon><Note/></ListItemIcon>
+                        <ListItemText inset primary="Lease agreement"/>
+                    </MenuItem> 
+                    </div>
+                  : <div></div>
+                  }
                   <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
                   <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
                   <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => deleteCar(car,console.log)} />

@@ -18,7 +18,7 @@ function DialogDeleteCar({closeMenu, item, confirm}){
                 <ListItemIcon><Delete/></ListItemIcon>
                 <ListItemText inset primary="Delete"/>
             </MenuItem>
-            <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+            <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title"> {`Are you sure about delete the ${car.make} ${car.model}?`} </DialogTitle>
                 <DialogActions>
                     <Button onClick={handleConfirm(confirm,car,closeMenu)} color="primary">

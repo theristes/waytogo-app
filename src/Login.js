@@ -25,7 +25,7 @@ function Login() {
         return;
     }    
     const send = await forgotPassword(loginData.email);
-    (send && send.id== -1) ? setErrorMessage(send.message) : setSuccessMessage(send.message);
+    (send && send.id === -1) ? setErrorMessage(send.message) : setSuccessMessage(send.message);
   };
 
   return  (<div className="main-cointainer">
