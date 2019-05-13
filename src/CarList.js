@@ -13,9 +13,6 @@ import  { DialogDeleteCar } from './DialogDeleteCar';
 import  { DialogEditPhotoCar } from './DialogEditPhotoCar';
 import  { Error } from './Error';
 import  { Loading } from './Loading';
-import  { GenerateLeaseAgreement } from './LeaseAgreement';
-
-
 
 function CarOptions({item}) {
     const [anchorEl, setAnchorEl] = useState(null);
@@ -26,15 +23,6 @@ function CarOptions({item}) {
               </IconButton>
               <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
                   <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
-                  {item.customer ? 
-                    <div>
-                    <MenuItem onClick={ () => GenerateLeaseAgreement(item) }>
-                        <ListItemIcon><Note/></ListItemIcon>
-                        <ListItemText inset primary="Lease agreement"/>
-                    </MenuItem> 
-                    </div>
-                  : <div></div>
-                  }
                   <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
                   <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
                   <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => deleteCar(car,console.log)} />

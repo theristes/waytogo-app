@@ -1,5 +1,5 @@
 import  React from 'react';
-import  { AppBar, Toolbar } from '@material-ui/core';
+import  { AppBar, Toolbar, Button } from '@material-ui/core';
 import  pngLogo from './assets/logo-plate.png';
 import  Login from './Login';
 import  { useAuthState } from 'react-firebase-hooks/auth';
@@ -14,6 +14,7 @@ import  { DialogExitApp } from './DialogExitApp';
 
 function  App() {
   const { _, user } = useAuthState(auth);
+   // audio.play();
  
   if (user) {
     return  (<div>
