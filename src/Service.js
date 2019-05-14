@@ -35,6 +35,7 @@ async function authUser ({email, password}) {
     let user;
     const auth =  await firebaseApp.auth();
     try {
+        await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         try {
             const signIn = await auth.signInWithEmailAndPassword(email,password);
             user = {id: signIn.user.uid, message: 'user signed'}
