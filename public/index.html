@@ -5,11 +5,23 @@
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#3f51b5" />
-    <link rel="apple-touch-icon" href="logo-min.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="logo-min.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo-min.png">
-    <link rel="apple-touch-icon" sizes="167x167" href="logo-min.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Waytogo App">
     
+    <link rel="apple-touch-icon" href="logo-min.png">
+    <link rel="apple-touch-icon" href="logo-min.png" sizes="152x152" >
+    <link rel="apple-touch-icon" href="logo-min.png" sizes="180x180">
+    <link rel="apple-touch-icon" href="logo-min.png" sizes="167x167" >
+    
+    <link href="splash@3x.png" sizes="2048x2732" rel="apple-touch-startup-image" media="(min-device-width: 1024px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"/>
+    <link href="splash@3x.png" sizes="1668x2224" rel="apple-touch-startup-image" media="(min-device-width: 834px) and (max-device-width: 834px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"/>
+    <link href="splash@3x.png" sizes="1536x2048" rel="apple-touch-startup-image"  media="(min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) and (orientation: portrait)"/>
+    <link href="splash@3x.png" sizes="1125x2436" rel="apple-touch-startup-image"  media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/>
+    <link href="splash@3x.png" sizes="1242x2208" rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/>
+    <link href="splash@2x.png" sizes="750x1334" rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/>
+    <link href="splash.png" sizes="640x1136" rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/>
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <title>Waytogo App</title>
   </head>
@@ -20,5 +32,17 @@
     </audio>
     <div id="root"></div>
   </body>
+  <script>
+    const isIos = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      return /iphone|ipad|ipod/.test( userAgent );
+    }
+    // Detects if device is in standalone mode
+    const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+    // Verifica se deve exibir notificação popup de instalação:
+    if (isIos() && !isInStandaloneMode()) {
+      this.setState({ showInstallMessage: true });
+    }
+  </script>
   
 </html>

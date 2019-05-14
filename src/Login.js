@@ -4,6 +4,7 @@ import { Card, CardContent, Typography, TextField, CardActions, Button } from "@
 import { authUser, createUser, forgotPassword } from './Service';
 import { DialogAddUser } from './NewUser';
 import { AlertMessage } from './AppUtils';
+import logoPlate from './assets/logo-plate.png';
 
 function Login() {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -27,28 +28,27 @@ function Login() {
     const send = await forgotPassword(loginData.email);
     (send && send.id === -1) ? setErrorMessage(send.message) : setSuccessMessage(send.message);
   };
-
-  return  (<div className="main-cointainer">
+ 
+  return  (<div className="login-cointainer">
                   <Card>
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
-                        Login
+                        <img className="img-logo" src={logoPlate}/>
                       </Typography>
                       <TextField  label="Email" onChange={handleChange('email')}
                                         margin="dense" variant="filled" fullWidth />
                       <TextField  label="Password" type="password" onChange={handleChange('password')}
                                   margin="dense" variant="filled" fullWidth/>
-                      <CardActions>
-                        <Button variant="contained" size="small" color="primary" onClick={handleEnterButton}>
+                        <br/><br/>
+                        <Button className="login-buttons" variant="contained" margin="dense" size="large" color="primary" onClick={handleEnterButton}>
                           Enter
-                        </Button>
-                        <Button variant="contained" size="small" color="primary" onClick={ () => setOpenNewUser(true)}>
+                        </Button><br/><br/>
+                        <Button className="login-buttons" variant="contained"  size="large" color="primary" onClick={ () => setOpenNewUser(true)}>
                           New User
-                        </Button>
-                        <Button color="secondary" size="small" onClick={handleForgotPasswordButton}>
+                        </Button><br/><br/>
+                        <Button className="login-buttons" color="secondary" size="small" onClick={handleForgotPasswordButton}>
                           Forgot Password?
                         </Button>
-                      </CardActions>
                     </CardContent>
                   </Card>
                   <DialogAddUser open={openNewUser} setOpen={setOpenNewUser} confirm={user => createUser(user) } />

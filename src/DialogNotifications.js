@@ -5,7 +5,6 @@ import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Badge,
 import { Notifications } from '@material-ui/icons';
 import { useCollection }   from  'react-firebase-hooks/firestore';
 import { getNotificationColletion } from './Service';
-import  alarm from  './assets/alarm.mp3';
 
 function DialogNotifications({alarm}) {
     const [open, setOpen] = useState(false);

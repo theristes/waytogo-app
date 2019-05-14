@@ -21,13 +21,13 @@ function  App() {
               <AppBar>
                 <Toolbar>
                   <DialogExitApp confirm={() => auth.signOut()}/>
+                  <img src={pngLogo} className="img-logo" alt="logo"/>
                   <IconButton color="inherit" aria-label="Alarm">
                     { alarmOn ?
                       <VolumeUp onClick={() => setAlarmOn(false)}/> : 
                       <VolumeOff onClick={() => (setAlarmOn(true),document.getElementById('alarm').play()) }/> 
                     }
                   </IconButton>
-                  <img src={pngLogo} className="img-logo" alt="logo"/>
                   <DialogNotifications alarm={alarmOn} />
                 </Toolbar>
               </AppBar>
@@ -38,14 +38,10 @@ function  App() {
             </div>)
   }
 
-  return  (<div>
-            <AppBar>
-              <Toolbar>
-                <img src={pngLogo} className="img-logo" alt="logo" />
-              </Toolbar>
-            </AppBar>
-            <Login/>
-          </div>)
+  return  ( 
+            <div className="bg-login">
+              <Login/>
+            </div>)
 }
 
 export default App;

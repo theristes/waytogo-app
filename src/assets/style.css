@@ -1,7 +1,14 @@
   body {
-    background: #cbd3e9;
+    background: #f7f7f7;
   }
-  
+    
+  .login-cointainer {
+    display: block;
+    height: 100%;
+    margin-top: 5rem;
+    margin-bottom: auto;
+  }  
+
   .main-cointainer {
     display: block;
     height: 100%;
@@ -19,15 +26,19 @@
     bottom: 0;
     margin-bottom: 20px;
     margin-right: 12px;
+  }  
+  
+  .login-buttons {
+    width: 100%;
+    margin: 4px;    
   }
   
-  
-
   .img-logo {
     width: 40%;
     height: 40%;
     margin-right: auto;
     margin-left: auto;
+    display: block;
   }
   
   .img-car {
@@ -38,8 +49,12 @@
   
   .img-loading {
     display: block;
-    height: 100%;
-    width: 100%;
+    height: 40%;
+    width: 40%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5rem;
+    margin-bottom: auto;
   }
   
   .loading-label {
@@ -82,7 +97,6 @@
     align-content: center;
     text-align: center;
   }
-
 
   
   img:hover img.img-car {

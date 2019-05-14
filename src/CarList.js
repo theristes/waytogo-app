@@ -1,8 +1,8 @@
 import  React, { useState }  from  'react';
 import  gifLoading from  './assets/loading.gif';
 import  pngError  from  './assets/error.png';
-import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography, MenuItem, ListItemIcon }  from  '@material-ui/core';
-import  { ExpandMore, Note }  from  '@material-ui/icons';
+import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography }  from  '@material-ui/core';
+import  { ExpandMore }  from  '@material-ui/icons';
 import  { useCollection }   from  'react-firebase-hooks/firestore';
 import  { updateCar, deleteCar, getCarsColletion }  from  './Service';
 import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }  from  './AppUtils';

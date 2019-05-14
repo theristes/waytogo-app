@@ -1,15 +1,17 @@
 {
   "short_name": "Waytogo App",
   "name": "Waytogo Autolease",
+  "orientation": "portrait",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3f51b5",
+  "background_color": "#cbd3e9",
   "icons": [
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#3f51b5",
-  "background_color": "#cbd3e9"
+  ]
+  
 }
