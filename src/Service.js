@@ -6,8 +6,6 @@ import 'firebase/firestore';
 import 'firebase/messaging';
 import 'firebase/storage';
 
-import  alarm
-  from  './assets/alarm.mp3'
 
 import  { MESSAGE_UPDATE, MESSAGE_DELETE, MESSAGE_INSERT, CLEAN_OBJECT, NO_PHOTO }
   from  './AppUtils';
@@ -107,8 +105,6 @@ async function pushNotifications() {
         } finally {
             messaging.onMessage( payload => {
                 console.log(payload);
-                const audio = new Audio(alarm);
-                audio.play();
             });
         }
     } catch (error) {

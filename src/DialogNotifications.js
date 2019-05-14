@@ -5,8 +5,9 @@ import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Badge,
 import { Notifications } from '@material-ui/icons';
 import { useCollection }   from  'react-firebase-hooks/firestore';
 import { getNotificationColletion } from './Service';
+import  alarm from  './assets/alarm.mp3';
 
-function DialogNotifications() {
+function DialogNotifications({alarm}) {
     const [open, setOpen] = useState(false);
     const  { error,loading,value } = useCollection(getNotificationColletion);
     const [countNotifies, setCountNotifies] = useState(0);
@@ -21,6 +22,17 @@ function DialogNotifications() {
     
     useEffect(() => {
         value && setCountNotifies(value.docs.length);
+        if (value && value.docs.length > 0) {            
+            if (alarm) {
+                let play = document.getElementById('alarm').play();
+                if (play !== undefined) {
+                    play.catch(error => {
+                    }).then(() => {
+                        console.log('Played');
+                    });
+                }
+            }
+        }
         return () => {
             setCountNotifies(0);
         }
