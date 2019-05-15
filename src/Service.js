@@ -127,6 +127,7 @@ async function updateCar(car, fn) {
         const toUpdate = await getCarsColletion.doc(car.id);
         toUpdate.set(CLEAN_OBJECT(car),{merge:true});
         fn(MESSAGE_UPDATE);
+        updateNotifes(process.env,console.log);
     } catch (error) {
         fn(error);
     }
@@ -142,6 +143,13 @@ async function deleteCar(car, fn) {
     }
 }
 
+async function updateNotifes(env, fn) {
+    const url = `${env.REACT_APP_CRON_JOB}?key=${env.REACT_APP_CRON_KEY}`;
+    const response = await fetch(url);
+    if (response.success == true) {
+        fn(response);
+    }
+}
 pushNotifications();
 
 export {authUser, createUser, forgotPassword, auth, addCar,getCars, updateCar, deleteCar, getCarsColletion, getNotificationColletion, imagesRef}
