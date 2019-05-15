@@ -1,7 +1,7 @@
 import  React , { useState, useEffect } 
   from  'react';
 import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Badge,
-         List, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+         List, Dialog, DialogTitle, DialogContent, Drawer, Typography } from '@material-ui/core';
 import { Notifications } from '@material-ui/icons';
 import { useCollection }   from  'react-firebase-hooks/firestore';
 import { getNotificationColletion } from './Service';
@@ -47,14 +47,13 @@ function DialogNotifications({alarm}) {
                     <DialogContent>
                             { error && <b>Error</b> }
                             { loading }
-                            { value &&  <List> {
-                                            ( value.docs.map( notification =>
-                                                <NotificationDetail 
-                                                    key={notification.id} 
-                                                    item={{id:notification.id, ...notification.data()}
-                                                }/>
-                                            ) )
-                                        }</List> }
+                            { value &&  value.docs.length > 0  &&  <List> { ( value.docs.map( notification =>
+                                                                            <NotificationDetail 
+                                                                                key={notification.id} 
+                                                                                item={{id:notification.id, ...notification.data()}
+                                                                            }/> ) ) }
+                                                                    </List> }
+                            { value &&  value.docs.length === 0  &&  <Typography align="center" gutterBottom>No notifications to show</Typography> }
                     </DialogContent>
             </Dialog>
         </div>

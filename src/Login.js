@@ -29,7 +29,7 @@ function Login() {
     (send && send.id === -1) ? setErrorMessage(send.message) : setSuccessMessage(send.message);
   };
  
-  return  (<div className="login-cointainer">
+  return  (<div className="main-cointainer">
                   <Card>
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
