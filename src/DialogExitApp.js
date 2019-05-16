@@ -1,7 +1,7 @@
 import  React , { useState } 
   from  'react';
 
-import  { Dialog, DialogTitle, DialogActions, Button, IconButton, DialogContent, Typography}
+import  { Dialog, DialogActions, Button, IconButton, DialogContent, Typography}
   from  '@material-ui/core';
 
 import  { ExitToAppOutlined }
@@ -9,6 +9,7 @@ import  { ExitToAppOutlined }
 
 function DialogExitApp({confirm}){
     const [open, setOpen] = useState(false);
+    // eslint-disable-next-line
     const handleConfirm = (fn,_open) => () => (fn(),setOpen(false));
     return  <div>
                 <IconButton color="inherit" onClick={() => setOpen(true)}  aria-owns='fade-menu' aria-haspopup='true' aria-label="Menu">

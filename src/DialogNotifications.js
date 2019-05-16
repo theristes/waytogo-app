@@ -1,7 +1,7 @@
 import  React , { useState, useEffect } 
   from  'react';
 import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Badge,
-         List, Dialog, DialogTitle, DialogContent, Drawer, Typography, AppBar, Toolbar } from '@material-ui/core';
+         List, Dialog, Typography, AppBar, Toolbar } from '@material-ui/core';
 import { Notifications, Close } from '@material-ui/icons';
 import { useCollection }   from  'react-firebase-hooks/firestore';
 import { getNotificationColletion } from './Service';
@@ -35,7 +35,7 @@ function DialogNotifications({alarm}) {
         return () => {
             setCountNotifies(0);
         }
-    })
+    },[value,alarm])
     return  <div>
             <IconButton color="inherit" aria-label="Notifications" onClick={handleToggleOpen(true)}>
                 <Badge badgeContent={countNotifies} color="secondary">

@@ -20,11 +20,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
     const [services, setServices] = useState(item.services || []);
     const textField = useRef({});
 
-    const handleChange = event => {
-        if ((event.target.value) && (event.target.value.trim().length > 0)) { 
-            setValueText( event.target.value)
-        }
-    };
+    const handleChange = event => setValueText(event.target.value);
 
     const handleClickAdd = (event) => {
         if (valueText.trim().length > 0) {
@@ -34,6 +30,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
             textField.current.focus();
         }
     };
+    
     const handleCheck = service => {
         services.map( (s => { if (s === service) { s.done = !s.done; } return s }));
         setServices(services);
@@ -60,7 +57,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
                 <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}>{`Services \n ${item.make} ${item.model} ${item.licensePlate}`} </DialogTitle>
                     <DialogContent>
-                        <TextField  label="Add a service" value={valueText}  onChange={handleChange}
+                        <TextField  label="Add a service" value={valueText} onChange={handleChange}
                                     margin="normal" variant="filled" inputRef={textField} 
                                     autoFocus  fullWidth
                                     InputProps={{endAdornment: 

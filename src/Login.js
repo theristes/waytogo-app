@@ -1,6 +1,6 @@
 import  React from  'react';
 import { useState } from "react";
-import { Card, CardContent, Typography, TextField, CardActions, Button } from "@material-ui/core";
+import { Card, CardContent, Typography, TextField, Button } from "@material-ui/core";
 import { authUser, createUser, forgotPassword } from './Service';
 import { DialogAddUser } from './NewUser';
 import { AlertMessage } from './AppUtils';
@@ -33,7 +33,7 @@ function Login() {
                   <Card>
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
-                        <img className="img-logo" src={logoPlate}/>
+                        <img className="img-logo" src={logoPlate} alt="Login"/>
                       </Typography>
                       <TextField  label="Email" onChange={handleChange('email')}
                                         margin="dense" variant="filled" fullWidth />

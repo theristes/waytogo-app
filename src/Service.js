@@ -85,6 +85,7 @@ async function addCar(car, fn) {
         const toAdd = await getCarsColletion;
         toAdd.add({photo:NO_PHOTO, ...car});
         fn(MESSAGE_INSERT);
+        updateNotifes(process.env,console.log);
     } catch(error) {
         fn(error)
     }
@@ -138,6 +139,7 @@ async function deleteCar(car, fn) {
         const toDelete = await getCarsColletion.doc(car.id);
         toDelete.delete();
         fn(MESSAGE_DELETE);
+        updateNotifes(process.env,console.log);
     } catch (error) {
         fn(error);
     }

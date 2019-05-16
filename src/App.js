@@ -15,6 +15,8 @@ import { VolumeOff, VolumeUp } from '@material-ui/icons';
 
 function  App() {
   const [alarmOn, setAlarmOn] = useState(false);
+  const handleVolume = () => alarmOn? setAlarmOn(false) : (setAlarmOn(true),document.getElementById('alarm').play());
+  // eslint-disable-next-line
   const { _, user } = useAuthState(auth);
     if (user) {
     return  (<div>
@@ -22,11 +24,8 @@ function  App() {
                 <Toolbar>
                   <DialogExitApp confirm={() => auth.signOut()}/>
                   <img src={pngLogo} className="img-logo" alt="logo"/>
-                  <IconButton color="inherit" aria-label="Alarm">
-                    { alarmOn ?
-                      <VolumeUp onClick={() => setAlarmOn(false)}/> : 
-                      <VolumeOff onClick={() => (setAlarmOn(true),document.getElementById('alarm').play()) }/> 
-                    }
+                  <IconButton color="inherit" aria-label="Alarm" onClick={handleVolume}>
+                    { alarmOn ? <VolumeUp/> : <VolumeOff/> }
                   </IconButton>
                   <DialogNotifications alarm={alarmOn} />
                 </Toolbar>
