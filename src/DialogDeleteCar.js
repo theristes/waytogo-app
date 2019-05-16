@@ -20,12 +20,12 @@ function DialogDeleteCar({closeMenu, item, confirm}){
             </MenuItem>
             <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                 <DialogContent> 
-                    <Typography align="center" variant="h6" gutterBottom> {`Are you sure about delete the ${car.make} ${car.model}?`} </Typography>
-                </DialogContent>
-                <DialogActions style={{padding:'1rem'}}>
+                    <Typography align="center" variant="h6" gutterBottom> {`Confirm to delete the ${car.make} ${car.model}`} </Typography>
+                    <DialogActions>
                         <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
                         <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
+                </DialogContent>                
             </Dialog>
         </div>
 }

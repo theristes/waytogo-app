@@ -16,12 +16,12 @@ function DialogExitApp({confirm}){
                 </IconButton>
                 <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={() => setOpen(false)}  aria-labelledby="form-dialog-title">
                 <DialogContent> 
-                    <Typography align="center" variant="h6" gutterBottom> {`Do you wanna exit the app?`} </Typography>
-                </DialogContent>
-                <DialogActions style={{padding:'1rem'}}>
+                    <Typography align="center" variant="h6" gutterBottom> {`Confirm to log out`} </Typography>
+                    <DialogActions>
                         <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,false)} color="primary">Confirm</Button>
                         <Button variant="raised" margin="auto" onClick={() => setOpen(false)} color="secondary">Cancel</Button>
                     </DialogActions>
+                </DialogContent>
             </Dialog>
             </div>
 }

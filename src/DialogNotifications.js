@@ -1,8 +1,8 @@
 import  React , { useState, useEffect } 
   from  'react';
 import { ListItem, ListItemAvatar, Avatar, ListItemText, IconButton, Badge,
-         List, Dialog, DialogTitle, DialogContent, Drawer, Typography } from '@material-ui/core';
-import { Notifications } from '@material-ui/icons';
+         List, Dialog, DialogTitle, DialogContent, Drawer, Typography, AppBar, Toolbar } from '@material-ui/core';
+import { Notifications, Close } from '@material-ui/icons';
 import { useCollection }   from  'react-firebase-hooks/firestore';
 import { getNotificationColletion } from './Service';
 
@@ -42,9 +42,16 @@ function DialogNotifications({alarm}) {
                     <Notifications/>
                 </Badge>
             </IconButton>
-            <Dialog open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title"> Notifications </DialogTitle>
-                    <DialogContent>
+            <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
+                    <AppBar>
+                        <Toolbar>
+                            <Typography variant="h5" style={{flexGrow:1, color:'#FFFFFF'}}>
+                                Notifications
+                            </Typography>
+                            <Close color="inherit" onClick={handleToggleOpen(false)}/>
+                        </Toolbar>
+                    </AppBar>
+                    <div className='main-cointainer'>
                             { error && <b>Error</b> }
                             { loading }
                             { value &&  value.docs.length > 0  &&  <List> { ( value.docs.map( notification =>
@@ -54,7 +61,7 @@ function DialogNotifications({alarm}) {
                                                                             }/> ) ) }
                                                                     </List> }
                             { value &&  value.docs.length === 0  &&  <Typography align="center" variant="h6" gutterBottom>No notifications to show</Typography> }
-                    </DialogContent>
+                    </div>
             </Dialog>
         </div>
 }
