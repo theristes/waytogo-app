@@ -53,7 +53,7 @@ function DialogNotifications({alarm}) {
                                                                                 item={{id:notification.id, ...notification.data()}
                                                                             }/> ) ) }
                                                                     </List> }
-                            { value &&  value.docs.length === 0  &&  <Typography align="center" gutterBottom>No notifications to show</Typography> }
+                            { value &&  value.docs.length === 0  &&  <Typography align="center" variant="h6" gutterBottom>No notifications to show</Typography> }
                     </DialogContent>
             </Dialog>
         </div>

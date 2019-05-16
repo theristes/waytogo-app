@@ -2,7 +2,7 @@
 import  React , { useState } 
 from  'react';
 
-import  { Dialog, DialogContent, DialogTitle, DialogActions, Button }
+import  { Dialog, Card, CardMedia, Collapse, IconButton }
 from  '@material-ui/core';
 
 
@@ -11,6 +11,7 @@ from  './Service';
 
 import  { LOADING_PHOTO, ERROR_PHOTO }
 from  './AppUtils';
+import { Photo, Save, Edit, AddAPhoto } from '@material-ui/icons';
 
 
 function DialogEditPhotoCar({closeMenu, item, open, setOpen, confirm}){
@@ -33,23 +34,20 @@ function DialogEditPhotoCar({closeMenu, item, open, setOpen, confirm}){
     }
     return  <div>
             <Dialog open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Photo</DialogTitle>
-                <DialogContent>
-                    <img className='img-car' src={photo} alt={`${car.make} ${car.model}`} />
-                    <input className="input-file" accept="image/*" id="contained-button-file" multiple type="file" onChange={handleChange}/>
-                </DialogContent>
-                <DialogActions>
-                <label htmlFor="contained-button-file">
-                    <Button color="primary" component="span">
-                        Upload
-                    </Button>
-                </label>
-                <Button onClick={handleToggleOpen(false,closeMenu)} color="secondary">
-                    Ok
-                </Button>
-                </DialogActions>
+            <Card style={{backgroundColor:'#3f51b5'}} raised>         
+                <CardMedia style={{height: 0, paddingTop: '80%'}} image={photo} title="Chang the pic"></CardMedia>
+                <IconButton style={{color:"#ffffff"}} aria-label="Upload Image">
+                    <label htmlFor="contained-button-file">
+                        <AddAPhoto />
+                    </label>
+                </IconButton> 
+                <Collapse>
+                    <input className="input-file" accept="image/*" id="contained-button-file" style={{ position:'relative', visibility:'hidden'}} multiple type="file" onChange={handleChange}/>
+                </Collapse>
+            </Card>
             </Dialog>
         </div>
 }
+
 
 export {DialogEditPhotoCar}

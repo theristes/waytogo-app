@@ -146,7 +146,7 @@ async function deleteCar(car, fn) {
 async function updateNotifes(env, fn) {
     const url = `${env.REACT_APP_CRON_JOB}?key=${env.REACT_APP_CRON_KEY}`;
     const response = await fetch(url);
-    if (response.success == true) {
+    if (response.success === true) {
         fn(response);
     }
 }

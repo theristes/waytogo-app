@@ -24,22 +24,22 @@ function DialogEditCar({closeMenu, item, confirm, menuVisible, forceFocusOnDate}
                     <ListItemText inset primary="Edit Details"/>
                 </MenuItem> 
                 : <></> }
-                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title"> {`${car.make} ${car.model}`} </DialogTitle>
+                <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}> {`${car.make} ${car.model}`} </DialogTitle>
                     <DialogContent>
-                        <TextField  label="Make" value={car.make} onChange={handleChange('make')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Model" value={car.model} onChange={handleChange('model')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Color" value={car.color} onChange={handleChange('color')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Vim" value={car.vim} onChange={handleChange('vim')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Plate" value={car.licensePlate} onChange={handleChange('licensePlate')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Year" value={car.year} onChange={handleChange('year')} margin="normal" variant="filled" fullWidth/> <br/>
-                        <TextField  label="The last oil changed" type="Date" onChange={handleChange('dtLastOilChange')} value={car.dtLastOilChange}
+                        <TextField  label="Make" value={car.make} style={{width:'100%'}}  onChange={handleChange('make')} margin="normal" variant="filled" fullWidth autoFocus={!forceFocusOnDate}/>
+                        <TextField  label="Model" value={car.model} style={{width:'100%'}}  onChange={handleChange('model')} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Color" value={car.color} style={{width:'100%'}}  onChange={handleChange('color')} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Vim" value={car.vim} style={{width:'100%'}}  onChange={handleChange('vim')} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Plate" style={{width:'100%'}}  value={car.licensePlate} onChange={handleChange('licensePlate')} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Year" style={{width:'100%'}}  value={car.year} onChange={handleChange('year')} margin="normal" variant="filled" fullWidth/> <br/>
+                        <TextField  label="The last oil changed" type="Date" style={{width:'96%'}} onChange={handleChange('dtLastOilChange')} value={car.dtLastOilChange}
                                     autoFocus={forceFocusOnDate} margin="normal" variant="filled" fullWidth 
                                     InputProps={{ startAdornment: (<InputAdornment position="start"> <CalendarToday /> </InputAdornment>) }}/> 
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
-                        <Button onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                    <DialogActions style={{padding:'1rem'}}>
+                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

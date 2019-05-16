@@ -24,16 +24,16 @@ function DialogEditCustomerCar({closeMenu, item, confirm}){
                 <ListItemIcon><Person/></ListItemIcon>
                 <ListItemText inset primary="Customer"/>
             </MenuItem>
-            <Dialog disableBackdropClick disableEscapeKeyDown open={open} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title"> Customer </DialogTitle>
+            <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}> Customer </DialogTitle>
                 <DialogContent>
-                    <TextField  label="Address" value={customer.address} onChange={handleChange('address')}
-                                margin="normal" variant="filled" fullWidth />
-                    <TextField  label="Document" value={customer.document} onChange={handleChange('document')}
+                    <TextField  label="Address" value={customer.address} style={{width:'100%'}} onChange={handleChange('address')}
+                                margin="normal" variant="filled" fullWidth autoFocus/>
+                    <TextField  label="Document" value={customer.document} style={{width:'100%'}} onChange={handleChange('document')}
                                 margin="normal" variant="filled" fullWidth/>
-                    <TextField  label="Name" value={customer.name} onChange={handleChange('name')}
+                    <TextField  label="Name" value={customer.name} style={{width:'100%'}} onChange={handleChange('name')}
                                 margin="normal" variant="filled" fullWidth/>
-                    <TextField  label="When the lease begins" type="Date"  onChange={handleChange('beginDate')}
+                    <TextField  label="When the lease begins" type="Date"  style={{width:'96%'}} onChange={handleChange('beginDate')}
                                 value={customer.beginDate} margin="normal" variant="filled" fullWidth 
                                 InputProps={{
                                     startAdornment: (
@@ -42,7 +42,7 @@ function DialogEditCustomerCar({closeMenu, item, confirm}){
                                     </InputAdornment>
                                     ),
                                 }}/> 
-                    <TextField  label="When the lease ends" type="Date" onChange={handleChange('endDate')}
+                    <TextField  label="When the lease ends" type="Date" style={{width:'96%'}} onChange={handleChange('endDate')}
                                 value={customer.endDate} margin="normal" variant="filled" fullWidth 
                                 InputProps={{
                                     startAdornment: (
@@ -51,24 +51,19 @@ function DialogEditCustomerCar({closeMenu, item, confirm}){
                                     </InputAdornment>
                                     ),
                                 }}/>
-                    <TextField  label="Lease's value" onChange={handleChange('value')}
+                    <TextField  label="Lease's value" style={{width:'96%'}} onChange={handleChange('value')}
                                 value={customer.value} onFocus={ () => customer.value === 0 ? setCustomer({...customer, value:''}) : null } 
                                 margin="normal" variant="filled" fullWidth 
                                 InputProps={{
                                     startAdornment: (<InputAdornment position="start"><AttachMoney/></InputAdornment>)
                                 }}/>
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleConfirm(confirm,item,closeMenu)} color="primary">
-                        Confirm
-                    </Button>
-                    <Button onClick={handleToggleOpen(false,closeMenu)} color="secondary">
-                        Cancel
-                    </Button>
-                </DialogActions>
+                <DialogActions style={{padding:'1rem'}}>
+                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                    </DialogActions>
             </Dialog>
         </div>
 }
-
 
 export {DialogEditCustomerCar}

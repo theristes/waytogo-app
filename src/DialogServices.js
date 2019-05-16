@@ -57,8 +57,8 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
                     </MenuItem>
                 : <></> }
 
-                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">{`Services \n ${item.make} ${item.model} ${item.licensePlate}`} </DialogTitle>
+                <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}>{`Services \n ${item.make} ${item.model} ${item.licensePlate}`} </DialogTitle>
                     <DialogContent>
                         <TextField  label="Add a service" value={valueText}  onChange={handleChange}
                                     margin="normal" variant="filled" inputRef={textField} 
@@ -79,13 +79,9 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
                             </ListItem> )) }
                         </List>
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleConfirm(confirm,item,closeMenu)} color="primary">
-                            Confirm
-                        </Button>
-                        <Button onClick={handleToggleOpen(false,closeMenu)} color="secondary">
-                            Cancel
-                        </Button>
+                    <DialogActions style={{padding:'1rem'}}>
+                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

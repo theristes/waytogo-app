@@ -32,7 +32,7 @@ function CarOptions({item}) {
     
 function Car({item}) {
     const [open, setOpen] = useState(false);
-    return  <Card className="car" raised> 
+    return  <Card style={{marginBottom:'0.5rem'}} raised> 
               <ListItem alignItems="flex-start">
                   <ListItemAvatar> 
                       <Avatar alt="Car Sharp" src={item.photo} onClick={() => (setOpen(true))}/>                  
@@ -69,7 +69,7 @@ function Cars(){
                                                  item={{id:car.id, ...car.data()}
                                     }/>)}
                                 </List>}
-                    { value &&  value.docs.length === 0  &&  <Typography align="center" gutterBottom>No cars registered on database</Typography> }
+                    { value &&  value.docs.length === 0  &&  <Typography align="center" variant="h6" gutterBottom>No cars registered on database</Typography> }
             </div>
 }
 

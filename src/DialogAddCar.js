@@ -17,16 +17,16 @@ function DialogAddCar({confirm}) {
                       </Fab>
                   </Tooltip>
                 </div>
-                <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title"> New Car </DialogTitle>
+                <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false)} aria-labelledby="form-dialog-title">
+                    <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}> Add a new car </DialogTitle>
                     <DialogContent>
-                        <TextField  label="Make" onChange={handleChange('make')} margin="normal" variant="filled" fullWidth />
-                        <TextField  label="Model" onChange={handleChange('model')}  margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Color" onChange={handleChange('color')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Vim" onChange={handleChange('vim')}  margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Plate" onChange={handleChange('licensePlate')}  margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Year" onChange={handleChange('year')} margin="normal" variant="filled" fullWidth/> <br/>
-                        <TextField  label="The last oil changed" type="Date" onChange={handleChange('dtLastOilChange')}
+                        <TextField  label="Make" onChange={handleChange('make')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth autoFocus/>
+                        <TextField  label="Model" onChange={handleChange('model')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Color" onChange={handleChange('color')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Vim" onChange={handleChange('vim')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Plate" onChange={handleChange('licensePlate')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="Year" onChange={handleChange('year')} style={{width:'100%'}} margin="normal" variant="filled" fullWidth/> <br/>
+                        <TextField  label="The last oil changed" type="Date" style={{width:'96%'}} onChange={handleChange('dtLastOilChange')}
                                     margin="normal" variant="filled" fullWidth 
                                     InputProps={{
                                         startAdornment: (
@@ -36,9 +36,9 @@ function DialogAddCar({confirm}) {
                                         ),
                                     }}/> 
                     </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleConfirm(confirm,car)} color="primary">Confirm</Button>
-                        <Button onClick={handleToggleOpen(false)} color="secondary">Cancel</Button>
+                    <DialogActions style={{padding:'1rem'}}>
+                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car)} color="primary">Confirm</Button>
+                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

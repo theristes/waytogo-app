@@ -1,7 +1,7 @@
 import  React , { useState } 
   from  'react';
 
-import  { Dialog, DialogTitle, DialogActions, Button, MenuItem, ListItemText, ListItemIcon }
+import  { Dialog, DialogTitle, DialogActions, Button, MenuItem, ListItemText, ListItemIcon, DialogContent, Typography }
   from  '@material-ui/core';
 
 import  { Delete }
@@ -19,15 +19,13 @@ function DialogDeleteCar({closeMenu, item, confirm}){
                 <ListItemText inset primary="Delete"/>
             </MenuItem>
             <Dialog disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title"> {`Are you sure about delete the ${car.make} ${car.model}?`} </DialogTitle>
-                <DialogActions>
-                    <Button onClick={handleConfirm(confirm,car,closeMenu)} color="primary">
-                        Confirm
-                    </Button>
-                    <Button onClick={handleToggleOpen(false,closeMenu)} color="secondary">
-                        Cancel
-                    </Button>
-                </DialogActions>
+                <DialogContent> 
+                    <Typography align="center" variant="h6" gutterBottom> {`Are you sure about delete the ${car.make} ${car.model}?`} </Typography>
+                </DialogContent>
+                <DialogActions style={{padding:'1rem'}}>
+                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                    </DialogActions>
             </Dialog>
         </div>
 }

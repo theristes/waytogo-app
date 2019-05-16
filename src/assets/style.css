@@ -1,7 +1,7 @@
   body {
     background: #f7f7f7;
   }
-  
+
   .main-cointainer {
     display: block;
     height: 100%;
@@ -9,16 +9,12 @@
     margin-bottom: auto;
   }  
   
-  .car {
-    margin-bottom: 0.5rem;
-  }
-  
   .button-add {
     position: fixed;
     right: 0;
     bottom: 0;
-    margin-bottom: 20px;
-    margin-right: 12px;
+    margin-bottom: 1rem;
+    margin-right: 0.8rem;
   }  
   
   .login-buttons {
