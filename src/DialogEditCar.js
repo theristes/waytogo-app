@@ -30,7 +30,7 @@ function DialogEditCar({closeMenu, item, confirm, menuVisible, forceFocusOnDate}
                         <TextField  label="Make" value={car.make} style={{width:'100%'}}  onChange={handleChange('make')} margin="normal" variant="filled" fullWidth autoFocus={!forceFocusOnDate}/>
                         <TextField  label="Model" value={car.model} style={{width:'100%'}}  onChange={handleChange('model')} margin="normal" variant="filled" fullWidth/>
                         <TextField  label="Color" value={car.color} style={{width:'100%'}}  onChange={handleChange('color')} margin="normal" variant="filled" fullWidth/>
-                        <TextField  label="Vim" value={car.vim} style={{width:'100%'}}  onChange={handleChange('vim')} margin="normal" variant="filled" fullWidth/>
+                        <TextField  label="VIN" value={car.vin} style={{width:'100%'}}  onChange={handleChange('vin')} margin="normal" variant="filled" fullWidth/>
                         <TextField  label="Plate" style={{width:'100%'}}  value={car.licensePlate} onChange={handleChange('licensePlate')} margin="normal" variant="filled" fullWidth/>
                         <TextField  label="Year" style={{width:'100%'}}  value={car.year} onChange={handleChange('year')} margin="normal" variant="filled" fullWidth/> <br/>
                         <TextField  label="The last oil changed" type="Date" style={{width:'96%'}} onChange={handleChange('dtLastOilChange')} value={car.dtLastOilChange}
@@ -38,8 +38,8 @@ function DialogEditCar({closeMenu, item, confirm, menuVisible, forceFocusOnDate}
                                     InputProps={{ startAdornment: (<InputAdornment position="start"> <CalendarToday /> </InputAdornment>) }}/> 
                     </DialogContent>
                     <DialogActions style={{padding:'1rem'}}>
-                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
-                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                        <Button variant="contained" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="contained" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

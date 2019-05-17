@@ -51,16 +51,10 @@ function DialogEditCustomerCar({closeMenu, item, confirm}){
                                     </InputAdornment>
                                     ),
                                 }}/>
-                    <TextField  label="Lease's value" style={{width:'96%'}} onChange={handleChange('value')}
-                                value={customer.value} onFocus={ () => customer.value === 0 ? setCustomer({...customer, value:''}) : null } 
-                                margin="normal" variant="filled" fullWidth 
-                                InputProps={{
-                                    startAdornment: (<InputAdornment position="start"><AttachMoney/></InputAdornment>)
-                                }}/>
                 </DialogContent>
                 <DialogActions style={{padding:'1rem'}}>
-                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
-                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                        <Button variant="contained" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="contained" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
             </Dialog>
         </div>

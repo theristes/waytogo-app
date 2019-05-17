@@ -77,8 +77,8 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
                         </List>
                     </DialogContent>
                     <DialogActions style={{padding:'1rem'}}>
-                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
-                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                        <Button variant="contained" margin="auto" onClick={handleConfirm(confirm,item,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="contained" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </Dialog>
             </div>

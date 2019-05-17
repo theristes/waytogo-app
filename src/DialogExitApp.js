@@ -19,8 +19,8 @@ function DialogExitApp({confirm}){
                 <DialogContent> 
                     <Typography align="center" variant="h6" gutterBottom> {`Confirm to log out`} </Typography>
                     <DialogActions>
-                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,false)} color="primary">Confirm</Button>
-                        <Button variant="raised" margin="auto" onClick={() => setOpen(false)} color="secondary">Cancel</Button>
+                        <Button variant="contained" margin="auto" onClick={handleConfirm(confirm,false)} color="primary">Confirm</Button>
+                        <Button variant="contained" margin="auto" onClick={() => setOpen(false)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </DialogContent>
             </Dialog>

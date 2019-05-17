@@ -59,7 +59,7 @@ function Car({item}) {
 }
     
 function Cars(){
-    const  { error, loading, value } = useCollection(getCarsColletion);
+    const  { error, loading, value } = useCollection(getCarsColletion.orderBy('year','asc'));
     return  <div className="cars">
                     { error && <Error errorMessage={error} errorImage={pngError}/> }
                 { loading && <Loading loadingImage={gifLoading}/>  }

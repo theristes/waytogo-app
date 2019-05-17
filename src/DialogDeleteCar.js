@@ -22,8 +22,8 @@ function DialogDeleteCar({closeMenu, item, confirm}){
                 <DialogContent> 
                     <Typography align="center" variant="h6" gutterBottom> {`Confirm to delete the ${car.make} ${car.model}`} </Typography>
                     <DialogActions>
-                        <Button variant="raised" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
-                        <Button variant="raised" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
+                        <Button variant="contained" margin="auto" onClick={handleConfirm(confirm,car,closeMenu)} color="primary">Confirm</Button>
+                        <Button variant="contained" margin="auto" onClick={handleToggleOpen(false,closeMenu)} color="secondary">Cancel</Button>
                     </DialogActions>
                 </DialogContent>                
             </Dialog>

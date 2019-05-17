@@ -113,16 +113,6 @@ async function pushNotifications() {
     }
 }
 
-async function getCars(fn) {
-    try {
-        const data = await getCarsColletion.get();
-        const cars = await data.docChanges().map(v => ({id:v.doc.id, ...v.doc.data()}));
-        fn(cars);
-    } catch (error) {
-        fn(error);
-    }
-}
-
 async function updateCar(car, fn) {
     try {
         const toUpdate = await getCarsColletion.doc(car.id);
@@ -154,4 +144,4 @@ async function updateNotifes(env, fn) {
 }
 pushNotifications();
 
-export {authUser, createUser, forgotPassword, auth, addCar,getCars, updateCar, deleteCar, getCarsColletion, getNotificationColletion, imagesRef}
+export {authUser, createUser, forgotPassword, auth, addCar, updateCar, deleteCar, getCarsColletion, getNotificationColletion, imagesRef}

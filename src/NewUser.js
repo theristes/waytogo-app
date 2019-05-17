@@ -12,10 +12,15 @@ const DialogAddUser = ({open, setOpen, confirm}) => {
         if (user.email === '') {
             setErrorMessage(`The email field can't be blank`);
             return;
-        }    
+        }
+        
+        if (user.password.length < 8) {
+            setErrorMessage(`The password can't be shorter than 8 chars`);
+            return;
+        }
 
         if (user.password !== user.confirmPassword) {
-            setErrorMessage(`The password's fields must have the same value each`)
+            setErrorMessage(`The password's fields must both have the same value each`)
             return
         }
         
