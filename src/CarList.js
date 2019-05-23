@@ -11,6 +11,7 @@ import  { DialogEditCustomerCar } from './DialogEditCustomerCar';
 import  { DialogServices } from './DialogServices';
 import  { DialogDeleteCar } from './DialogDeleteCar';
 import  { DialogEditPhotoCar } from './DialogEditPhotoCar';
+import  { DialogEditNotes } from './DialogEditNotes';
 import  { Error } from './Error';
 import  { Loading } from './Loading';
 
@@ -24,6 +25,7 @@ function CarOptions({item}) {
               <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
                   <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
                   <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
+                  <DialogEditNotes closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}/>
                   <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
                   <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => deleteCar(car,console.log)} />
               </Menu>
@@ -72,6 +74,5 @@ function Cars(){
                     { value &&  value.docs.length === 0  &&  <Typography align="center" variant="h6" gutterBottom>No cars registered on database</Typography> }
             </div>
 }
-
 
 export { Cars }

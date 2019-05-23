@@ -6,7 +6,7 @@ import  { Dialog, DialogContent, TextField, DialogTitle,
           ListItemText, ListItemIcon, InputAdornment}
   from  '@material-ui/core';
 
-import  { Person, CalendarToday, AttachMoney }
+import  { Person, CalendarToday }
   from  '@material-ui/icons';
 
 
