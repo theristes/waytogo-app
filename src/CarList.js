@@ -1,8 +1,8 @@
 import  React, { useState }  from  'react';
 import  gifLoading from  './assets/loading.gif';
 import  pngError  from  './assets/error.png';
-import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography }  from  '@material-ui/core';
-import  { ExpandMore }  from  '@material-ui/icons';
+import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography, Tooltip }  from  '@material-ui/core';
+import  { ExpandMore, Note }  from  '@material-ui/icons';
 import  { useCollection }   from  'react-firebase-hooks/firestore';
 import  { updateCar, deleteCar, getCarsColletion }  from  './Service';
 import  { PARAMS_CAR_ID, PARAMS_OIL_CHANGE, PARAMS_HAS_SERVICES }  from  './AppUtils';
@@ -33,7 +33,9 @@ function CarOptions({item}) {
 }
     
 function Car({item}) {
+    const [tooltipOpen, setToolTipOpen] = useState(false)
     const [open, setOpen] = useState(false);
+    const handleToolTip = async() => {setToolTipOpen(true); await (new Promise(resolve => setTimeout(resolve, 3000))); setToolTipOpen(false); }
     return  <Card style={{marginBottom:'0.5rem'}} raised> 
               <ListItem alignItems="flex-start">
                   <ListItemAvatar> 
@@ -54,7 +56,15 @@ function Car({item}) {
     
                     {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
                         <DialogServices item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} />
-                      : <></> }
+                      : <></>}
+
+                    {(item.notes && (item.notes.trim().length > 0))  ?
+                        <IconButton onClick={handleToolTip}> 
+                            <Tooltip open={tooltipOpen} title={item.notes} aria-label={item.notes}>
+                                <Note color="secondary"/> 
+                            </Tooltip>
+                        </IconButton> 
+                        : <></>}
                   <CarOptions item={item}></CarOptions>
             </ListItem> 
           </Card>
