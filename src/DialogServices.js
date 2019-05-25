@@ -4,7 +4,7 @@ import  React , { useState, useRef }
 import  { Dialog, DialogContent, TextField, DialogTitle,
           DialogActions, Button, MenuItem, Checkbox,
           ListItemText, ListItemIcon, InputAdornment, List,
-          ListItem, ListItemSecondaryAction, IconButton }
+          ListItem, ListItemSecondaryAction, IconButton, Tooltip }
   from  '@material-ui/core';
 
 import  { Add, Delete, Build }
@@ -14,7 +14,7 @@ import  { RANDOM_KEY }
   from  './AppUtils';
 
 
-function DialogServices({closeMenu, item, confirm, menuVisible}) {
+function DialogServices({closeMenu, item, confirm, menuVisible, smallIcon}) {
     const [open, setOpen] = useState(!menuVisible);
     const [valueText, setValueText] = useState('');
     const [services, setServices] = useState(item.services || []);
@@ -24,7 +24,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
 
     const handleClickAdd = (event) => {
         if (valueText.trim().length > 0) {
-            services.push({ index: RANDOM_KEY(6), description:valueText, done:false });
+            services.push({index: RANDOM_KEY(6), description: valueText, done: false});
             setServices(services);
             setValueText('');
             textField.current.focus();
@@ -47,13 +47,18 @@ function DialogServices({closeMenu, item, confirm, menuVisible}) {
     const handleConfirm = (fn,car,closeBehind) => () => (fn({...car, services:services}), handleToggleOpen(false,closeBehind)());
     const handleToggleOpen = (value,closeBehind) => () => ((!value) && (closeBehind)) ? (closeBehind(), setOpen(value)) : setOpen(value);
     return  <div>
-                { (menuVisible) ? 
+                { (menuVisible) && (!smallIcon) ? 
                     <MenuItem onClick={handleToggleOpen(true)}>
                         <ListItemIcon><Build/></ListItemIcon>
                         <ListItemText inset primary="Services"/>
                     </MenuItem>
+                : (menuVisible) && (smallIcon) ? 
+                    <IconButton onClick={handleToggleOpen(true)}> 
+                        <Tooltip title="Services" aria-label="Services">
+                            <Build color="primary"/> 
+                        </Tooltip>
+                    </IconButton> 
                 : <></> }
-
                 <Dialog fullScreen disableBackdropClick disableEscapeKeyDown open={open} onClose={handleToggleOpen(false,closeMenu)} aria-labelledby="form-dialog-title">
                     <DialogTitle id="form-dialog-title" style={{borderBottom:'0.01rem solid'}}>{`Services \n ${item.make} ${item.model} ${item.licensePlate}`} </DialogTitle>
                     <DialogContent>

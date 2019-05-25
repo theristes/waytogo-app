@@ -23,10 +23,10 @@ function CarOptions({item}) {
                   <ExpandMore/>
               </IconButton>
               <Menu id="fade-menu" anchorEl={anchorEl} open={ Boolean(anchorEl)} onClose={() => handleAnchor(null)}>
-                  <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible={true}/>
+                  <DialogEditCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} menuVisible/>
                   <DialogEditCustomerCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)} />
                   <DialogEditNotes closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}/>
-                  <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible={true}/>
+                  <DialogServices closeMenu={() => handleAnchor(null)} item={item} confirm={car => updateCar(car,console.log)}  menuVisible/>
                   <DialogDeleteCar closeMenu={() => handleAnchor(null)} item={item} confirm={car => deleteCar(car,console.log)} />
               </Menu>
             </div>;
@@ -51,7 +51,7 @@ function Car({item}) {
                     <DialogEditPhotoCar open={open} setOpen={setOpen}  item={item} confirm={car => updateCar(car,console.log)}/>
                      
                     {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
-                        <DialogEditCar item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} forceFocusOnDate={true} />
+                        <DialogEditCar item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} forceFocusOnDate/>
                       : <></> }
     
                     {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
@@ -65,6 +65,10 @@ function Car({item}) {
                             </Tooltip>
                         </IconButton> 
                         : <></>}
+                    {(item.services && (item.services.length > 0))  ?
+                        <DialogServices item={item} confirm={car => updateCar(car,console.log)} menuVisible smallIcon/>
+                    : <></>}
+
                   <CarOptions item={item}></CarOptions>
             </ListItem> 
           </Card>
