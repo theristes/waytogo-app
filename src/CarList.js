@@ -1,7 +1,7 @@
-import  React, { useState }  from  'react';
+import  React, { useState, useEffect, useRef }  from  'react';
 import  gifLoading from  './assets/loading.gif';
 import  pngError  from  './assets/error.png';
-import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography, Tooltip }  from  '@material-ui/core';
+import  { Menu, IconButton, List, ListItem, Card, ListItemText, ListItemAvatar, Avatar, Typography, Tooltip, Fade }  from  '@material-ui/core';
 import  { ExpandMore, Note }  from  '@material-ui/icons';
 import  { useCollection }   from  'react-firebase-hooks/firestore';
 import  { updateCar, deleteCar, getCarsColletion }  from  './Service';
@@ -33,45 +33,52 @@ function CarOptions({item}) {
 }
     
 function Car({item}) {
+    const [blink, setBlink] = useState(true);
     const [tooltipOpen, setToolTipOpen] = useState(false)
     const [open, setOpen] = useState(false);
     const handleToolTip = async() => {setToolTipOpen(true); await (new Promise(resolve => setTimeout(resolve, 3000))); setToolTipOpen(false); }
-    return  <Card style={{marginBottom:'0.5rem'}} raised> 
-              <ListItem alignItems="flex-start">
-                  <ListItemAvatar> 
-                      <Avatar alt="Car Sharp" src={item.photo} onClick={() => (setOpen(true))}/>                  
-                  </ListItemAvatar>
-                  <ListItemText primary={`${item.make} ${item.model}`} secondary={
-                      <React.Fragment>
-                          <Typography component="span" className="inline" color="textPrimary"> </Typography>
-                          <strong>Plate: </strong>{item.licensePlate} <br/>
-                          <strong>Customer: </strong> {item.customer ? item.customer.name : 'No customer'} <br/>
-                          <strong>Year: </strong> {item.year} <br/>
-                      </React.Fragment>}/>
-                    <DialogEditPhotoCar open={open} setOpen={setOpen}  item={item} confirm={car => updateCar(car,console.log)}/>
-                     
-                    {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
-                        <DialogEditCar item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} forceFocusOnDate/>
-                      : <></> }
-    
-                    {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
-                        <DialogServices item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} />
-                      : <></>}
+    useInterval(() => {
+        (item.services && (item.services.length > 0)) ?  setBlink(!blink) : setBlink(true)
+      }, 500);
 
-                    {(item.notes && (item.notes.trim().length > 0))  ?
-                        <IconButton onClick={handleToolTip}> 
-                            <Tooltip open={tooltipOpen} title={item.notes} aria-label={item.notes}>
-                                <Note color="secondary"/> 
-                            </Tooltip>
-                        </IconButton> 
+    return  <Fade in={blink}>     
+                <Card style={{marginBottom:'0.5rem'}} raised> 
+                <ListItem alignItems="flex-start">
+                    <ListItemAvatar> 
+                        <Avatar alt="Car Sharp" src={item.photo} onClick={() => (setOpen(true))}/>                  
+                    </ListItemAvatar>
+                    <ListItemText primary={`${item.make} ${item.model}`} secondary={
+                        <React.Fragment>
+                            <Typography component="span" className="inline" color="textPrimary"> </Typography>
+                            <strong>Plate: </strong>{item.licensePlate} <br/>
+                            <strong>Customer: </strong> {item.customer ? item.customer.name : 'No customer'} <br/>
+                            <strong>Year: </strong> {item.year} <br/>
+                        </React.Fragment>}/>
+                        <DialogEditPhotoCar open={open} setOpen={setOpen}  item={item} confirm={car => updateCar(car,console.log)}/>
+                        
+                        {(item.id === PARAMS_CAR_ID && (PARAMS_OIL_CHANGE)) ? 
+                            <DialogEditCar item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} forceFocusOnDate/>
+                        : <></> }
+        
+                        {(item.id === PARAMS_CAR_ID && (PARAMS_HAS_SERVICES)) ? 
+                            <DialogServices item={item}  confirm={car => updateCar(car,console.log)} menuVisible={false} />
                         : <></>}
-                    {(item.services && (item.services.length > 0))  ?
-                        <DialogServices item={item} confirm={car => updateCar(car,console.log)} menuVisible smallIcon/>
-                    : <></>}
 
-                  <CarOptions item={item}></CarOptions>
-            </ListItem> 
-          </Card>
+                        {(item.notes && (item.notes.trim().length > 0))  ?
+                            <IconButton onClick={handleToolTip}> 
+                                <Tooltip open={tooltipOpen} title={item.notes} aria-label={item.notes}>
+                                    <Note color="secondary"/> 
+                                </Tooltip>
+                            </IconButton> 
+                            : <></>}
+                        {(item.services && (item.services.length > 0))  ?
+                            <DialogServices item={item} confirm={car => updateCar(car,console.log)} menuVisible smallIcon/>
+                        : <></>}
+
+                    <CarOptions item={item}></CarOptions>
+                </ListItem> 
+            </Card>
+        </Fade>
 }
     
 function Cars(){
@@ -88,5 +95,27 @@ function Cars(){
                     { value &&  value.docs.length === 0  &&  <Typography align="center" variant="h6" gutterBottom>No cars registered on database</Typography> }
             </div>
 }
+
+
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+  
+    // Remember the latest function.
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+  
+    // Set up the interval.
+    useEffect(() => {
+      function tick() {
+        savedCallback.current();
+      }
+      if (delay !== null) {
+        let id = setInterval(tick, delay);
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+  }
 
 export { Cars }
