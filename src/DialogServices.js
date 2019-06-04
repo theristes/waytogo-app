@@ -4,7 +4,7 @@ import  React , { useState, useRef }
 import  { Dialog, DialogContent, TextField, DialogTitle,
           DialogActions, Button, MenuItem, Checkbox,
           ListItemText, ListItemIcon, InputAdornment, List,
-          ListItem, ListItemSecondaryAction, IconButton, Tooltip }
+          ListItem, ListItemSecondaryAction, IconButton, Tooltip, Divider }
   from  '@material-ui/core';
 
 import  { Add, Delete, Build }
@@ -32,7 +32,12 @@ function DialogServices({closeMenu, item, confirm, menuVisible, smallIcon}) {
     };
     
     const handleCheck = service => {
-        services.map( (s => { if (s === service) { s.done = !s.done; } return s }));
+        services.map( (s => { 
+            if (s === service) {
+                s.done = !s.done; 
+                s.done? s.dtDone =  (new Date()).toDateString() : s.dtDone = ''; 
+            } return s 
+        }) );
         setServices(services);
         textField.current.focus();
     };
@@ -55,7 +60,7 @@ function DialogServices({closeMenu, item, confirm, menuVisible, smallIcon}) {
                 : (menuVisible) && (smallIcon) ? 
                     <IconButton onClick={handleToggleOpen(true)}> 
                         <Tooltip title="Services" aria-label="Services">
-                            <Build color="primary"/> 
+                            <Build color="secondary"/> 
                         </Tooltip>
                     </IconButton> 
                 : <></> }
@@ -72,13 +77,14 @@ function DialogServices({closeMenu, item, confirm, menuVisible, smallIcon}) {
                             { services.map((service) => (
                                 <ListItem key={service.index} dense button>
                                     <Checkbox tabIndex={-1} checked={service.done} onClick={() => handleCheck(service)} disableRipple/>
-                                    <ListItemText primary={service.description} />
+                                    <ListItemText primary={service.description} secondary={service.dtDone} />
                                     <ListItemSecondaryAction>
                                         <IconButton aria-label="Delete" onClick={ () => deleteService(service.index) }>
                                             <Delete />
                                         </IconButton>
                                     </ListItemSecondaryAction>
-                            </ListItem> )) }
+                                    
+                                </ListItem> )) }
                         </List>
                     </DialogContent>
                     <DialogActions style={{padding:'1rem'}}>
