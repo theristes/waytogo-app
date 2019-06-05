@@ -38,7 +38,8 @@ function Car({item}) {
     const [open, setOpen] = useState(false);
     const handleToolTip = async() => {setToolTipOpen(true); await (new Promise(resolve => setTimeout(resolve, 3000))); setToolTipOpen(false); }
     useInterval(() => {
-        (item.services && (item.services.length > 0)) ?  setBlink(!blink) : setBlink(true)
+        const foundService = item.services && item.services.some(s => !s.done);
+        foundService ?  setBlink(!blink) : setBlink(true)
       }, 500);
 
     return  <Fade in={blink}>     
